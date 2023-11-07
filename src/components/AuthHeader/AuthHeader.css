@@ -1,0 +1,74 @@
+header {
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
+	gap: 0 20px;
+	justify-content: space-between;
+	margin: 8px 8px 20px 8px;
+}
+
+header button + button, header input + input {
+	margin-left: 4px;
+}
+  
+header form > div {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	justify-content: flex-end;
+}
+
+header form > div > div {
+	display: flex;
+	justify-content: flex-end;
+}
+  
+header h1 {
+	flex-grow: 1;
+	margin: 0;
+}
+
+header img {
+	height: 2em;
+	width: 2em;
+}
+
+header input {
+	background-color: transparent;
+	border: solid 1px transparent;
+	color: var(--text-color);
+	transition: border 0.5s;
+	width: 25%;
+}
+
+header:hover input {
+	border: solid 1px var(--panel-inset);
+}
+
+header input::placeholder {
+	color: transparent;
+	transition: color 0.5s;
+}
+
+header:hover input::placeholder {
+	color: rgba(255, 255, 255, 0.25);
+}
+
+header *.error {
+	color: var(--error-color);
+	text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+	header form > div {
+		gap: 4px;
+	}
+
+	header input {
+		border: solid 1px var(--panel-inset);
+	}
+	
+	header input::placeholder {
+		color: rgba(255, 255, 255, 0.25);
+	}
+}
