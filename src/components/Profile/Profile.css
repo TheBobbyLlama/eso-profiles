@@ -1,0 +1,86 @@
+#profile {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	padding: 0 20px 20px 20px;
+}
+
+#profile h1 {
+	margin: 0;
+	user-select: text;
+}
+
+#profile label.player {
+	color: silver;
+}
+
+#profile > ul {
+	color: gray;
+	display: inline-flex;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	transform: scale(calc(width / 100vw));
+	user-select: none;
+}
+
+#profile > ul > li {
+	display: block;
+	list-style: none;
+	white-space: nowrap;
+}
+
+#profile > ul > li + li::before {
+	content: "-";
+	margin: 0 6px;
+}
+
+#profile-image {
+	background-position: center !important;
+	background-size: cover !important;
+	border-radius: min(8px, 2vw);
+	height: calc(100vw - 28px);
+	margin: 10px 0;
+	max-height: 400px;
+	max-width: 400px;
+	width: calc(100vw - 28px);
+}
+
+#profile-info {
+	margin-bottom: 20px;
+}
+
+#profile-info td {
+	vertical-align: top;
+}
+
+#profile-info td:first-child {
+	font-weight: bold;
+	padding-right: 8px;
+	text-align: right;
+}
+
+#profile-info.with-image {
+	max-width: 400px;
+	width: calc(100vw - 28px);
+}
+
+#profile > h2 {
+	margin: 10px 0;
+}
+
+#profile section {
+	align-self: stretch;
+}
+
+#profile section h1, #profile section h2, #profile section h3, #profile section h4, #profile section h5 {
+	margin: 10px 0 8px 0;
+	text-align: center;
+	user-select: text;
+}
+
+@media screen and (max-width: 800px) {
+	#profile {
+		padding: 0 10px 10px 10px;
+	}
+}

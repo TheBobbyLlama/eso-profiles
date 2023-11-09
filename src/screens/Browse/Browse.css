@@ -1,0 +1,94 @@
+#browse {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: row;
+	margin: 0 0 0 20px;
+	padding-bottom: 0;
+	padding-right: 0;
+}
+
+#browse #character-list {
+	display: flex;
+	flex-basis: 25%;
+	flex-direction: column;
+	max-height: calc(100% - 44px); /* TODO - Pretty hacky... */
+}
+
+#browse #character-list > #list-holder {
+	background-color: var(--panel-border);
+	border-radius: 8px;
+	height: 100%;
+	margin: 8px 0;
+	overflow-y: auto;
+}
+
+#browse #character-list ol {
+	display: block;
+	margin: 0;
+	padding: 8px;
+}
+
+#browse #character-list li {
+	background-color: var(--panel-inset);
+	border-radius: 6px;
+	cursor: pointer;
+	list-style-type: none;
+	padding: 8px 12px;
+	text-overflow: ellipsis;
+	transition: background-color 0.25s;
+	white-space: nowrap;
+}
+
+#browse #character-list li + li {
+	margin-top: 4px;
+}
+
+#browse #character-list li:hover {
+	background-color: var(--panel-background);
+	font-style: italic;
+}
+
+#browse #character-list li.selected {
+	background-color: var(--panel-background);
+	font-weight: bold;
+	pointer-events: none;
+}
+
+#browse #character-list #abbr-list {
+	display: none;
+}
+
+#browse #character-profile {
+	flex-basis: 75%;
+	max-height: calc(100% - 20px);
+	overflow-y: auto;
+}
+
+@media screen and (max-width: 1000px) {
+	#browse {
+		align-items: stretch;
+		flex-direction: column;
+		margin: 0;
+		padding: 0;
+	}
+
+	#browse #character-list {
+		height: 64px;
+		max-height: 64px;
+		margin: 0 10px 20px 10px;
+	}
+
+	#browse #character-list > #list-holder {
+		display: none;
+	}
+
+	#browse #character-list #abbr-list {
+		display: block;
+		height: 24px;
+	}
+
+	#browse #character-profile {
+		flex-grow: 1;
+		max-height: auto;
+	}
+}

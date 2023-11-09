@@ -1,9 +1,14 @@
-import "./Main.css";
+import { Outlet } from 'react-router-dom';
+
+import AuthHeader from '../../components/AuthHeader/AuthHeader';
 
 function Main() {
-	return <div>
-		Content here
-	</div>
+  return (
+    <>
+      <AuthHeader />
+      <Outlet />
+    </>
+  );
 }
 
 export default Main;

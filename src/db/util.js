@@ -1,0 +1,54 @@
+/// Adds HTML encoding to a given string.
+function encode(name) {
+	return name.replace(/[&<>'"]/g, function(match) {
+		switch (match)
+		{
+			case "&":
+				return "&amp;";
+			case "<":
+				return "&lt;";
+			case ">":
+				return "&gt;";
+			case "'":
+				return "&apos;";
+			case "\"":
+				return "&quot;";
+			default:
+				return "[ENCODING ERROR!]"
+		}
+	})
+}
+
+/// Removes HTML encoding from a given string.
+function decode(name) {
+	return name.replace(/&amp;|&lt;|&gt;|&apos;|&quot;/g, function (match) {
+		switch (match)
+		{
+			case "&amp;":
+				return "&";
+			case "&lt;":
+				return "<";
+			case "&gt;":
+				return ">";
+			case "&apos;":
+				return "'";
+			case "&quot;":
+				return "\"";
+			default:
+				return "[DECODING ERROR!]"
+		}
+	})
+}
+
+/// Strips all non-alphanumeric characters from a string.
+function transform(input) {
+	return decode(input).replace(/[\s\W]/g, "").toLowerCase();
+}
+
+const dbUtil = {
+	encode,
+	decode,
+	transform,
+}
+
+export default dbUtil;

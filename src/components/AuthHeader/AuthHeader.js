@@ -44,7 +44,7 @@ function AuthHeader() {
 				</div>
 				<div>
 					<button type="submit" disabled={!userInfo.userName || !userInfo.password}>{localize("LABEL_LOGIN")}</button>
-					<button>{localize("LABEL_SIGNUP")}</button>
+					<button type="button">{localize("LABEL_SIGN_UP")}</button>
 				</div>
 			</div>
 			{(authError) ? <div className="error">{authError}</div> : <></>}

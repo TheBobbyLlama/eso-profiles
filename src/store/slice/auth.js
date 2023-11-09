@@ -5,7 +5,7 @@ import authFuncs from "../../db/auth";
 export const authSlice = createSlice({
 	name: "auth",
 	initialState: {
-		busy: true
+		busy: false
 	},
 	reducers: {
 		startupTasks() { },
