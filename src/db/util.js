@@ -21,7 +21,7 @@ function encode(name) {
 
 /// Removes HTML encoding from a given string.
 function decode(name) {
-	return name.replace(/&amp;|&lt;|&gt;|&apos;|&quot;/g, function (match) {
+	return name.replace(/&amp;|&lt;|&gt;|&apos;|&#39;|&quot;/g, function (match) {
 		switch (match)
 		{
 			case "&amp;":
@@ -31,6 +31,7 @@ function decode(name) {
 			case "&gt;":
 				return ">";
 			case "&apos;":
+			case "&#39;":
 				return "'";
 			case "&quot;":
 				return "\"";

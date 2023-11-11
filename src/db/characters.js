@@ -16,6 +16,31 @@ function getAllCharacterData() {
 	});
 }
 
+function getFullCharacterData(key) {
+		return new Promise((res) => {
+			const charRef = ref(db, `characters/${key}`);
+
+			get(charRef).then(async (charResult) => {
+				if (charResult.exists()) {
+					const charData = { [key]: charResult.val() };
+					const profileRef = ref(db, `profiles/${key}`);
+
+					get(profileRef).then(async (profileResult) => {
+						if (profileResult.exists()) {
+							charData[key].profile = profileResult.val();
+
+							res(charData);
+						} else {
+							res(charData);
+						}
+					})
+				} else {
+					res({});
+				}
+			})
+		})
+}
+
 function getCharacterProfileData(key) {
 	return new Promise((res) => {
 		const profileRef = ref(db, `profiles/${key}`);
@@ -32,6 +57,7 @@ function getCharacterProfileData(key) {
 
 const characterFuncs = {
 	getAllCharacterData,
+	getFullCharacterData,
 	getCharacterProfileData,
 };
 

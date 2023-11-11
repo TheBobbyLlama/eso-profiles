@@ -27,17 +27,23 @@ const characteristics = [
 
 function Profile({character}) {
 	const [curCharacter, setCurCharacter] = useState(character);
-	const characterData = useSelector(charSelectors.list)[curCharacter];
+	const characterData = useSelector(charSelectors.list)[dbUtil.transform(curCharacter)];
 	const ref = useRef(null);
 	const fadeTransition = useFade(ref);
+
+	const tmpList = useSelector(charSelectors.list);
 
 	useEffect(() => {
 		if (!curCharacter) {
 			setCurCharacter(character);
 		} else {
-			fadeTransition(setCurCharacter, character);
+			fadeTransition((char) => {
+				setCurCharacter(char);
+				if (ref.current)
+					ref.current.scrollIntoView({ behavior: "instant", inline: "start" }); // Scroll profile to top
+			}, character);
 		}
-	}, [character]); // Don't listen to the React linter here, it's stupid af and I hate it
+	}, [character]); // Don't listen to the React linter here, it's stupid and I hate it
 
 	const characterReadOut = [];
 	const characterCharacteristics = [];
@@ -65,14 +71,12 @@ function Profile({character}) {
 				}
 			})
 		}
-
-		console.log(characterData);
 	}
 
 	return <>
 		{(characterData?.profile) ? <div id="profile" ref={ref}>
 			<h1>{dbUtil.decode(characterData.name)}</h1>
-			<label className="player">@{characterData.player}</label>
+			<label className="player">@{dbUtil.decode(characterData.player)}</label>
 			{(characterReadOut.length) ? <ul>
 				{characterReadOut.map((item, index) => {
 					return <li key={index}>{item}</li>

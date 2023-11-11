@@ -22,7 +22,7 @@ function Browse() {
 	const fadeTransition = useFade(ref);
 
 	useEffect(() => {
-		dispatch(charActions.loadFullCharacterList());
+		dispatch(charActions.loadCharacterList());
 	}, []);
 
 	useEffect(() => {

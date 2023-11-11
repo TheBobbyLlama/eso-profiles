@@ -8,9 +8,17 @@ export const charSlice = createSlice({
 		list: {}
 	},
 	reducers: {
-		loadFullCharacterList() { },
-		fullCharacterListLoaded(state, action) {
+		loadCharacterList() { },
+		characterListLoaded(state, action) {
 			state.list = action.payload;
+		},
+		loadFullCharacterData(state, action) { },
+		fullCharacterDataLoaded(state, action) {
+			const key = Object.keys(action.payload)[0];
+
+			if (key) {
+				state.list[key] = action.payload[key];
+			}
 		},
 		loadCharacterProfile(state, action) { },
 		characterProfileLoaded(state, action) {
@@ -33,12 +41,23 @@ export const charSelectors = {
 }
 
 listener.startListening({
-	actionCreator: charActions.loadFullCharacterList,
+	actionCreator: charActions.loadCharacterList,
 	effect: async (action, listenerApi) => {
 		charFuncs.getAllCharacterData().then((result) => {
-			listenerApi.dispatch(charActions.fullCharacterListLoaded(result));
+			listenerApi.dispatch(charActions.characterListLoaded(result));
 		}).catch((error) => {
-			listenerApi.dispatch(charActions.fullCharacterListLoaded({}));
+			listenerApi.dispatch(charActions.characterListLoaded({}));
+		})
+	}
+});
+
+listener.startListening({
+	actionCreator: charActions.loadFullCharacterData,
+	effect: async (action, listenerApi) => {
+		charFuncs.getFullCharacterData(action.payload).then((result) => {
+			listenerApi.dispatch(charActions.fullCharacterDataLoaded(result));
+		}).catch((error) => {
+			listenerApi.dispatch(charActions.fullCharacterDataLoaded({}));
 		})
 	}
 });

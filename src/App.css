@@ -1,11 +1,11 @@
 :root {
   --error-color: #ff4840;
-  --interactable: #4080c0;
+  --interactable: #40c080;
   --panel-background: #26272a;
   --panel-border: #101418;
   --panel-inset: #18191c;
-  --link-color: #80c0ff;
-	--link-visited: #5090e0;
+  --link-color: #80d0ff;
+	--link-visited: #50c0e0;
   --text-color: white;
   }
 
@@ -73,12 +73,16 @@ h1 {
 }
 
 input {
-  border-color: var(--interactable);
+  border-color: gray;
   transition: border-color 0.5s;
 }
 
 input[readonly] {
   background-color: rgba(255, 255, 255, 0.25);
+}
+
+input:hover, input:active {
+  border-color: var(--interactable);
 }
 
 main {
