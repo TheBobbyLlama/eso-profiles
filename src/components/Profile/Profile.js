@@ -31,8 +31,6 @@ function Profile({character}) {
 	const ref = useRef(null);
 	const fadeTransition = useFade(ref);
 
-	const tmpList = useSelector(charSelectors.list);
-
 	useEffect(() => {
 		if (!curCharacter) {
 			setCurCharacter(character);
@@ -76,7 +74,7 @@ function Profile({character}) {
 	return <>
 		{(characterData?.profile) ? <div id="profile" ref={ref}>
 			<h1>{dbUtil.decode(characterData.name)}</h1>
-			<label className="player">@{dbUtil.decode(characterData.player)}</label>
+			<div className="player">@{dbUtil.decode(characterData.player)}</div>
 			{(characterReadOut.length) ? <ul>
 				{characterReadOut.map((item, index) => {
 					return <li key={index}>{item}</li>
@@ -84,13 +82,13 @@ function Profile({character}) {
 			</ul> : <></>}
 			{(characterData.profile.image) ? <div id="profile-image" style={{ background: `url('${characterData.profile.image}')`}} /> : <></>}
 			{(characterCharacteristics.length) ? <table id="profile-info" className={(characterData.profile.image) ? "with-image" : ""}><tbody>
-				{characterCharacteristics.map((item, index) => {return <tr key={item[0]}><td><label>{localize("LABELIZE", item[0])}</label></td><td>{characterCharacteristics[index][2] ? <>{item[1]}</> : <CustomMarkdown markdown={item[1]} />}</td></tr> })}
+				{characterCharacteristics.map((item, index) => {return <tr key={item[0]}><td><label>{localize("LABELIZE", item[0])}</label></td><td>{characterCharacteristics[index][2] ? <>{item[1]}</> : <CustomMarkdown text={item[1]} />}</td></tr> })}
 			</tbody></table> : <></>}
 			{(characterData.profile.description) ? <>
 				<h2>{localize("LABEL_DESCRIPTION")}</h2>
 				<section>
 					<CustomMarkdown
-						markdown={characterData.profile.description}
+						text={characterData.profile.description}
 					/>
 				</section>
 			</> : <></>}
@@ -98,7 +96,7 @@ function Profile({character}) {
 				<h2>{localize("LABEL_BIOGRAPHY")}</h2>
 				<section>
 					<CustomMarkdown
-						markdown={characterData.profile.biography}
+						text={characterData.profile.biography}
 					/>
 				</section>
 			</> : <></>}
@@ -106,7 +104,7 @@ function Profile({character}) {
 				<h2>{localize("LABEL_OOC_INFO")}</h2>
 				<section>
 					<CustomMarkdown
-						markdown={characterData.profile.oocInfo}
+						text={characterData.profile.oocInfo}
 					/>
 				</section>
 			</> : <></>}

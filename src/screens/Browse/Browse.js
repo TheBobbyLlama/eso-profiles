@@ -15,19 +15,19 @@ function Browse() {
 	const [forceRender, setForceRender] = useState(false); // Screen resize detection
 	const [curCharacter, setCurCharacter] = useState("");
 	const ref = useRef(null);
-  	const user = useSelector(authSelectors.user);
+  	const user = useSelector(authSelectors.user); // TODO
 	const characterList = useSelector(charSelectors.list);
 	const dispatch = useDispatch();
 
-	const fadeTransition = useFade(ref);
+	/* const fadeTransition = */ useFade(ref);
 
 	useEffect(() => {
 		dispatch(charActions.loadCharacterList());
-	}, []);
+	}, [ dispatch ]);
 
 	useEffect(() => {
 		setForceRender(!forceRender);
-	}, [window.screen.width]); // Don't listen to the React linter here, it's stupid af and I hate it
+	}, [window.screen.width]); // Don't listen to the React linter here, it's stupid and I hate it
 
 	const setCharacter = (key) => {
 		setCurCharacter(key);

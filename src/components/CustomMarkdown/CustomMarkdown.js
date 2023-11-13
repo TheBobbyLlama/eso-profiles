@@ -10,9 +10,9 @@ const charLinkExtension = function () {
 	return [charLink];
 }
 
-function CustomMarkdown({markdown}) {
+function CustomMarkdown({text}) {
 	return <MarkdownView
-		markdown={markdown}
+		markdown={text}
 		extensions={charLinkExtension}
 		options={{
 			openLinksInNewWindow: true,

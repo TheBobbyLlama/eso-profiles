@@ -1,0 +1,17 @@
+#sign-up {
+	padding: 10px 40px 20px 40px;
+	width: auto !important;
+}
+
+#sign-up form {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+#sign-up form > div {
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+	margin-top: 16px;
+}

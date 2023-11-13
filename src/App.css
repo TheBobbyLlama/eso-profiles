@@ -1,6 +1,6 @@
 :root {
   --error-color: #ff4840;
-  --interactable: #40c080;
+  --interactable: #20a060;
   --panel-background: #26272a;
   --panel-border: #101418;
   --panel-inset: #18191c;
@@ -45,10 +45,18 @@ button, input[type='checkbox'] {
   cursor: pointer;
 }
 
+section button {
+  background-color: var(--interactable);
+}
+
 button[disabled] {
   border-color: #606060;
-  color: gray;
+  color: rgba(255, 255, 255, 0.75);
   pointer-events: none;
+}
+
+section button[disabled] {
+  background-color: #606060;
 }
 
 button:hover {
@@ -73,7 +81,8 @@ h1 {
 }
 
 input {
-  border-color: gray;
+  border: solid 1px gray;
+  border-radius: 2px;
   transition: border-color 0.5s;
 }
 
@@ -111,6 +120,10 @@ section {
   padding: 10px 20px;
 }
 
+.error {
+  color: var(--error-color);
+}
+
 .fade {
   opacity: 0;
   transition: opacity 0.5s;
@@ -137,6 +150,10 @@ section {
 
 @media screen and (max-width: 440px) {
   button, input, select {
-    height: 24px;
+    height: 28px;
+  }
+
+  button {
+    padding: 2px 8px;
   }
 }

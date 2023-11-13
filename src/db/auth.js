@@ -1,41 +1,37 @@
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { get, ref } from "firebase/database";
+import { signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { get, set, ref } from "firebase/database";
 
 import db, { auth } from ".";
+import dbUtil from "./util";
 
-function loadUserData(uid) {
-	console.log("loadUserData", uid);
-	return;
-	return new Promise((res, rej) => {
-		const userRef = ref(db, `users/${uid}`);
+// import { setLocalizationLanguage } from "../localization";
 
-		get(userRef).then(async (result) => {
+function loadUserData(accountName) {
+	return new Promise  ((res) => {
+		const accountRef = ref(db, `accounts/${dbUtil.transform(accountName)}`);
+
+		get (accountRef).then(async (result) => {
 			if (result.exists()) {
-				const output = { ...result.val(), uid };
+				const userData = result.val();
 
-				output.permissions = output.permissions ? output.permissions.split("+") : [];
+				// TODO - Whenever extra localization is added!
+				// if (userData.language) {
+				// 	setLocalizationLanguage(userData.language);
+				// }
 
-				if (output.permissions.find(item => item === "developer")) {
-					output.towns = window.metadata?.towns || [];
-				}
-
-				if (!output.towns) {
-					output.towns = [];
-				}
-
-				res(output);
+				res(userData);
 			} else {
-				rej("No user data found.");
+				res({ display: accountName });
 			}
-		}).catch(rej);
-	})
+		})
+	});
 }
 
 // Load metadata, then check if user is already logged in.
 function startupTasks() {
 	return new Promise((res) => {
 		if (auth.currentUser) {
-			res(loadUserData(auth.currentUser.uid));
+			res(loadUserData(auth.currentUser.displayName));
 		} else {
 			res(false);
 		}
@@ -46,12 +42,14 @@ function login(userData) {
 	return new Promise((res, rej) => {
 		try {
 			signInWithEmailAndPassword(auth, userData.email, userData.password).then((result) => {
-				const { uid } = result.user;
+				const { displayName } = result.user;
 
-				return loadUserData(uid);
-			}).then(res).catch(rej);
+				return loadUserData(displayName);
+			}).then(res).catch((e) => {
+				rej(e.toString());
+			});
 		} catch (e) {
-			rej(e);
+			rej(e.toString());
 		}
 	});
 }
@@ -62,10 +60,37 @@ function logout() {
 	});
 }
 
+function signup(userData) {
+	return new Promise((res, rej) => {
+		try {
+			const accountRef = ref(db, `accounts/${dbUtil.transform(userData.displayName)}`);
+
+			get(accountRef).then((result) => {
+				if (result.exists()) {
+					rej("ERROR_ACCOUNT_NAME_TAKEN");
+				} else {
+					createUserWithEmailAndPassword(auth, userData.email, userData.password).then((credentials) => {
+						return updateProfile(credentials.user, { displayName: userData.displayName });
+					}).then(() => {
+						return set(accountRef, { display: userData.displayName });
+					}).then(() => {
+						res({ display: userData.displayName }); // Return bare account data object
+					}).catch((e) => {
+						rej(e.toString());
+					});
+				}
+			});
+		} catch (e) {
+			rej(e.toString());
+		}
+	});
+}
+
 const authFuncs = {
 	startupTasks,
 	login,
 	logout,
+	signup,
 };
 
 export default authFuncs;

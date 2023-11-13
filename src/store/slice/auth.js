@@ -8,7 +8,9 @@ export const authSlice = createSlice({
 		busy: false
 	},
 	reducers: {
-		startupTasks() { },
+		startupTasks(state) {
+			state.busy = true;
+		},
 		login(state, action) {
 			state.busy = true;
 			state.error = undefined;
@@ -21,7 +23,7 @@ export const authSlice = createSlice({
 		loginFailed(state, action) {
 			state.user = undefined;
 			state.busy = false;
-			state.error = action.payload.toString() || "Login failed.";
+			state.error = action.payload?.toString() || "ERROR_LOGIN_FAILED";
 		},
 		logout(state) {
 			state.busy = true;
@@ -29,6 +31,24 @@ export const authSlice = createSlice({
 		logoutComplete(state) {
 			state.user = undefined;
 			state.busy = false;
+		},
+		signup(state, action) {
+			state.busy = true;
+			state.error = undefined;
+		},
+		signupSuccess(state, action) {
+			state.busy = false;
+			state.user = action.payload;
+		},
+		signupFailed(state, action) {
+			state.busy = false;
+			state.error = state.error = action.payload?.toString() || "ERROR_SIGNUP_FAILED";
+		},
+		error(state, action) {
+			state.error = action.payload;
+		},
+		clearError(state) {
+			state.error = undefined;
 		},
 		setBusy(state, action) {
 			state.busy = action.payload;
@@ -68,21 +88,32 @@ listener.startListening({
 listener.startListening({
 	actionCreator: authActions.login,
 	effect: async (action, listenerApi) => {
-		// authFuncs.login(action.payload).then((result) => {
-		// 	listenerApi.dispatch(authActions.loginSuccess(result));
-		// }).catch((error) => {
-		// 	listenerApi.dispatch(authActions.loginFailed(error));
-		// });
+		authFuncs.login(action.payload).then((result) => {
+			listenerApi.dispatch(authActions.loginSuccess(result));
+		}).catch((error) => {
+			listenerApi.dispatch(authActions.loginFailed(error));
+		});
 	}
 });
 
 listener.startListening({
 	actionCreator: authActions.logout,
 	effect: async (action, listenerApi) => {
-		// authFuncs.logout().then(() => {
-		// 	listenerApi.dispatch(authActions.logoutComplete());
-		// });
+		authFuncs.logout().then(() => {
+			listenerApi.dispatch(authActions.logoutComplete());
+		});
 	}
-})
+});
+
+listener.startListening({
+	actionCreator: authActions.signup,
+	effect: async (action, listenerApi) => {
+		authFuncs.signup(action.payload).then((result) => {
+			listenerApi.dispatch(authActions.signupSuccess(result));
+		}).catch((error) => {
+			listenerApi.dispatch(authActions.signupFailed(error));
+		});
+	}
+});
 
 export default authSlice.reducer;

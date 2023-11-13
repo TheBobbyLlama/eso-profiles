@@ -1,10 +1,7 @@
 export function getUrlBase() {
-	switch(window.location.host) {
-	  case "localhost:3000":
-	  case "thebobbyllama.github.io":
+	if ((window.location.host.startsWith("localhost")) || (window.location.host.endsWith(".github.io")))
 		return "/eso-profiles";
-	  default:
-		return "/";
-	}
-  }
+	else
+		return "";
+}
   

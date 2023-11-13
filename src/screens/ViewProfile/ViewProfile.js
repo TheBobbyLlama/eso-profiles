@@ -20,7 +20,9 @@ function ViewProfile() {
 
 	document.title = (characterName) ? `${characterName} - ${localize("APP_TITLE")}` : localize("APP_TITLE");
 
-	return <Profile character={characterName} />
+	return <main id="view-profile">
+		<Profile character={characterName} />
+	</main>;
 }
 
 export default ViewProfile;
