@@ -4,6 +4,20 @@ const mapKey =  (rawText) => {
 			return "GENDER_MALE";
 		case "1":
 			return "GENDER_FEMALE";
+		case "arcanist":
+			return "CLASS_ARCANIST";
+		case "dragonknight":
+			return "CLASS_DRAGONKNIGHT";
+		case "necromancer":
+			return "CLASS_NECROMANCER";
+		case "nightblade":
+			return "CLASS_NIGHTBLADE";
+		case "sorcerer":
+			return "CLASS_SORCERER";
+		case "templar":
+			return "CLASS_TEMPLAR";
+		case "warden":
+			return "CLASS_WARDEN";
 		case "altmer":
 			return "RACE_ALTMER";
 		case "argonian":
@@ -26,8 +40,8 @@ const mapKey =  (rawText) => {
 			return "RACE_REDGUARD";
 		case "khajiit (ohmes)":
 			return "RACE_KHAJIIT_OHMES";
-		case "moarmer":
-			return "RACE_MAROMER";
+		case "maormer":
+			return "RACE_MAORMER";
 		case "reachman":
 			return "RACE_REACHMAN";
 		case "ashlander":
@@ -48,7 +62,7 @@ const mapKey =  (rawText) => {
 			return "SUPERNATURAL_VAMPIRE_CYRODIIL";
 		case "vamnpire (child of coldharbour)":
 		case "vampire (volkihar)":
-			return "SUPERNATURAL_VAMPIRE_VOLKIHAR"
+			return "SUPERNATURAL_VAMPIRE_CHILD_OF_COLDHARBOUR";
 		default:
 			return rawText;
 	}

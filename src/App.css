@@ -3,6 +3,7 @@
   --interactable: #20a060;
   --panel-background: #26272a;
   --panel-border: #101418;
+  --panel-inactive: #202126;
   --panel-inset: #18191c;
   --link-color: #80d0ff;
 	--link-visited: #50c0e0;
@@ -49,6 +50,12 @@ section button {
   background-color: var(--interactable);
 }
 
+button.minimal {
+  border-color: transparent;
+  color: gray;
+  transition: color 0.5s;
+}
+
 button[disabled] {
   border-color: #606060;
   color: rgba(255, 255, 255, 0.75);
@@ -63,10 +70,21 @@ button:hover {
   background-color: var(--interactable);
 }
 
+button.minimal[disabled] {
+  border-color: transparent;
+  color: #404040;
+}
+
+button.minimal:hover {
+  background-color: transparent;
+  color: var(--interactable);
+}
+
 code {
   background-color: var(--panel-inset);
   border-radius: 2px;
   padding: 0 8px;
+  white-space: wrap;
 }
 
 h1, h2, h3, h4, h5, label {
@@ -120,8 +138,32 @@ section {
   padding: 10px 20px;
 }
 
+#spinner-container {
+	align-items: center;
+  animation-duration: 0.5s;
+  animation-name: fade-in;
+	background-color: rgba(0, 0, 0, 0.25);
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+  transition: opacity 0.5s;
+}
+
 .error {
   color: var(--error-color);
+}
+
+.fa-clickable {
+  cursor: pointer;
+  transition: color 0.5s;
+}
+
+.fa-clickable:hover {
+  color: var(--interactable);
 }
 
 .fade {
@@ -136,6 +178,23 @@ section {
 .fade-out {
   opacity: 0;
   transition: opacity 0.25s;
+}
+
+.top-left {
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+.top-right {
+	position: absolute;
+  right: 0;
+	top: 0;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1 }
 }
 
 @media screen and (max-width: 1000px) {

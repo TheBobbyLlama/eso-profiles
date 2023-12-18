@@ -4,6 +4,7 @@ export const modalKey = {
 	clear: null,
 	generic: 1,
 	signup: 2,
+	characterFilter: 3,
 }
 
 export const modalSlice = createSlice({

@@ -6,6 +6,7 @@ header {
 	gap: 0 20px;
 	justify-content: space-between;
 	margin: 8px 8px 20px 8px;
+	position: relative;
 }
 
 header > * {
@@ -23,20 +24,18 @@ header > div {
 header > div > div {
 	color: gray;
 }
-
-header button + button, header input + input {
-	margin-left: 4px;
-}
   
-header form > div {
+header form {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 4px;
 	justify-content: flex-end;
+	margin-left: 42px;
 }
 
-header form > div > div {
+header form > div {
 	display: flex;
+	gap: 4px;
 	justify-content: flex-end;
 }
   
@@ -94,12 +93,9 @@ header *.error {
 }
 
 @media screen and (max-width: 500px) {
-	header form > div {
-		gap: 4px;
-	}
-
 	header input {
 		border: solid 1px var(--panel-inset);
+		flex-grow: 1;
 	}
 	
 	header input::placeholder {

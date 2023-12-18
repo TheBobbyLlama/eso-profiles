@@ -1,0 +1,34 @@
+.character-filter {
+	width: auto !important;
+}
+
+.character-filter-attributes, .character-filter-players {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 8px;
+	max-height: calc(100vh - 180px);
+}
+
+.character-filter-players {
+	display: flex;
+}
+
+.character-filter-attributes > *, .character-filter-players > * {
+	display: flex;
+	flex-basis: 1;
+	flex-direction: column;
+	gap: 4px;
+	max-height: calc(100vh - 180px);
+}
+
+@media screen and (max-width: 440px) {
+	.character-filter-attributes > * {
+		max-width: 50%;
+		white-space: nowrap;
+	}
+
+	.character-filter-attributes > *, .character-filter-players > * {
+		max-height: calc(100vh - 200px);
+	}
+}

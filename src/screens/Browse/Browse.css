@@ -35,7 +35,7 @@
 	list-style-type: none;
 	padding: 8px 12px;
 	text-overflow: ellipsis;
-	transition: background-color 0.25s;
+	transition: background-color 0.25s, font-weight 0.25s;
 	user-select: none;
 	white-space: nowrap;
 }
@@ -55,8 +55,26 @@
 	pointer-events: none;
 }
 
+#browse #character-list select {
+	margin-top: 8px;
+}
+
+#browse #character-list .list-header {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+#browse #character-list .list-header h2 {
+	align-items: center;
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+}
+
 #browse #character-list #abbr-list {
-	display: none;
+	/* display: none; */
+	margin-top: 8px;
 }
 
 #browse #character-profile {
@@ -80,11 +98,11 @@
 	}
 
 	#browse #character-list > #list-holder {
-		display: none;
+		/* display: none; */
 	}
 
 	#browse #character-list #abbr-list {
-		display: block;
+		/* display: block; */
 		height: 24px;
 	}
 

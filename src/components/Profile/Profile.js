@@ -2,6 +2,7 @@ import CustomMarkdown from "../CustomMarkdown/CustomMarkdown";
 
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { authSelectors } from "../../store/slice/auth";
 import { charSelectors } from "../../store/slice/characters";
 
 import dbUtil from "../../db/util";
@@ -9,6 +10,10 @@ import mapKey from "../../localization/map";
 import useFade from "../../hooks/useFade";
 
 import { localize } from "../../localization";
+import { getUrlBase } from "../../util";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook, faPenToSquare, faTrash, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 import "./Profile.css";
 
@@ -25,16 +30,15 @@ const characteristics = [
 	[ "relationships", "LABEL_RELATIONSHIPS" ],
 ];
 
-function Profile({character}) {
+function Profile({character, inset}) {
 	const [curCharacter, setCurCharacter] = useState(character);
 	const characterData = useSelector(charSelectors.list)[dbUtil.transform(curCharacter)];
+	const userName = useSelector(authSelectors.user)?.display;
 	const ref = useRef(null);
 	const fadeTransition = useFade(ref);
 
 	useEffect(() => {
-		if (!curCharacter) {
-			setCurCharacter(character);
-		} else {
+		if (character !== curCharacter) {
 			fadeTransition((char) => {
 				setCurCharacter(char);
 				if (ref.current)
@@ -42,6 +46,12 @@ function Profile({character}) {
 			}, character);
 		}
 	}, [character]); // Don't listen to the React linter here, it's stupid and I hate it
+
+	const goCharacterProfile = () => {
+		if (characterData) {
+			window.open(`${getUrlBase()}/view/${characterData.name}`, {});
+		}
+	}
 
 	const characterReadOut = [];
 	const characterCharacteristics = [];
@@ -71,8 +81,18 @@ function Profile({character}) {
 		}
 	}
 
-	return <>
-		{(characterData?.profile) ? <div id="profile" ref={ref}>
+	const ownedByCurrentUser = (characterData?.player === userName);
+
+	return <div id="profile" ref={ref}>
+		{(characterData?.profile) ? <>
+			<div className="top-left">
+				{(ownedByCurrentUser) && <button className="minimal" aria-label={localize("LABEL_EDIT_CHARACTER")} title={localize("LABEL_EDIT_CHARACTER")}><FontAwesomeIcon icon={faPenToSquare} /></button>}
+				{((ownedByCurrentUser) || (Object.keys(characterData?.stories || {}).length)) ? <button className="minimal" aria-label={localize("LABEL_STORIES")} title={localize("LABEL_STORIES")}><FontAwesomeIcon icon={faBook} /></button> : <></>}
+				{(ownedByCurrentUser) && <button className="minimal" aria-label={localize("LABEL_DELETE_CHARACTER")} title={localize("LABEL_DELETE_CHARACTER")}><FontAwesomeIcon icon={faTrash} /></button>}
+			</div>
+			{inset && <div className="top-right">
+				<button className="minimal" aria-label={localize("LABEL_SHOW_PROFILE")} title={localize("LABEL_SHOW_PROFILE")} onClick={goCharacterProfile}><FontAwesomeIcon icon={faUpRightFromSquare} /></button>
+			</div>}
 			<h1>{dbUtil.decode(characterData.name)}</h1>
 			<div className="player">@{dbUtil.decode(characterData.player)}</div>
 			{(characterReadOut.length) ? <ul>
@@ -108,8 +128,8 @@ function Profile({character}) {
 					/>
 				</section>
 			</> : <></>}
-		</div> : <></>}
-	</>
+		</> : <></>}
+	</div>
 }
 
 export default Profile;

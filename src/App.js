@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter basename={getUrlBase()}>
         <Routes>
           <Route path="/" element={<Main />}>
-            <Route path="/" element={<Browse />}></Route>
+            <Route index element={<Browse />}></Route>
             <Route path="view/:characterName" element={<ViewProfile />}></Route>
           </Route>
         </Routes>

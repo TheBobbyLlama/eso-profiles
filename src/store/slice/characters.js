@@ -5,6 +5,7 @@ import charFuncs from "../../db/characters";
 export const charSlice = createSlice({
 	name: "characters",
 	initialState: {
+		filter: {},
 		list: {}
 	},
 	reducers: {
@@ -28,6 +29,9 @@ export const charSlice = createSlice({
 				state.list[key].profile = Object.values(action.payload)[0];
 				state.list[key].lastUpdate = Date.now();
 			}
+		},
+		setListFilter(state, action) {
+			state.filter = action.payload;
 		}
 	}
 });
@@ -35,6 +39,9 @@ export const charSlice = createSlice({
 export const charActions = charSlice.actions;
 
 export const charSelectors = {
+	filter: (state) => {
+		return state.characters.filter;
+	},
 	list: (state) => {
 		return state.characters.list;
 	}

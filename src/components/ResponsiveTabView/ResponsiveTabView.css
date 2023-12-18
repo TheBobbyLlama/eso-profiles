@@ -1,0 +1,60 @@
+.responsive-tab-view {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.responsive-tab-view .responsive-tab-view--tabs {
+	background-color: var(--panel-inset);
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	display: none;
+	gap: 4px;
+	justify-content: flex-start;
+	padding: 4px 6px 0 4px;
+}
+
+.responsive-tab-view .responsive-tab-view--tabs > div {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	background-color: var(--panel-inactive);
+	cursor: pointer;
+	padding: 4px 8px;
+}
+
+.responsive-tab-view .responsive-tab-view--tabs > div.selected {
+	background-color: var(--panel-background);
+	cursor: none;
+}
+
+.responsive-tab-view .responsive-tab-view--tabs > div:not(.selected) > label {
+	color: rgba(255, 255, 255, 0.75);
+	cursor: pointer;
+}
+
+.responsive-tab-view .responsive-tab-view--content {
+	background-color: var(--panel-inset);
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.responsive-tab-view .responsive-tab-view--content > * {
+	background-color: var(--panel-background);
+	flex-grow: 1;
+	padding: 4px 8px;
+}
+
+@media screen and (max-width: 440px) {
+	.responsive-tab-view .responsive-tab-view--tabs {
+		display: flex;
+	}
+
+	.responsive-tab-view .responsive-tab-view--content > *:first-child {
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+	}
+
+	.responsive-tab-view .responsive-tab-view--content > *.hidden {
+		display: none;
+	}
+}

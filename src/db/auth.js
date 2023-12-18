@@ -63,18 +63,19 @@ function logout() {
 function signup(userData) {
 	return new Promise((res, rej) => {
 		try {
-			const accountRef = ref(db, `accounts/${dbUtil.transform(userData.displayName)}`);
+			const displayName = userData.displayName.match(/(?:@*)([\w]+)/)[1]; // Strip any @ the user may have added
+			const accountRef = ref(db, `accounts/${dbUtil.transform(displayName)}`);
 
 			get(accountRef).then((result) => {
 				if (result.exists()) {
 					rej("ERROR_ACCOUNT_NAME_TAKEN");
 				} else {
 					createUserWithEmailAndPassword(auth, userData.email, userData.password).then((credentials) => {
-						return updateProfile(credentials.user, { displayName: userData.displayName });
+						return updateProfile(credentials.user, { displayName });
 					}).then(() => {
-						return set(accountRef, { display: userData.displayName });
+						return set(accountRef, { display: displayName });
 					}).then(() => {
-						res({ display: userData.displayName }); // Return bare account data object
+						res({ display: displayName }); // Return bare account data object
 					}).catch((e) => {
 						rej(e.toString());
 					});

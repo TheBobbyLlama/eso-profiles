@@ -1,0 +1,30 @@
+.selection-list {
+	background-color: white;
+	border-radius: 4px;
+	margin: 0;
+	max-height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 0px;
+}
+
+.selection-list li {
+	color: black;
+	cursor: pointer;
+	padding: 0 8px;
+	transition: background-color 0.25s, color 0.25s;
+	user-select: none;
+}
+
+.selection-list li.selected {
+	background-color: var(--interactable);
+	color: white;
+}
+
+.selection-list li:hover {
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.selection-list li.selected:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+}

@@ -5,6 +5,9 @@ import { authActions, authSelectors } from "../../store/slice/auth";
 import { modalKey, modalActions, modalSelectors } from "../../store/slice/modal";
 import { localize } from "../../localization";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faRightFromBracket, faRightToBracket, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+
 import spinner from "../../assets/images/spinner.gif";
 import "./AuthHeader.css";
 
@@ -19,6 +22,7 @@ function AuthHeader() {
 
 	useEffect(() => {
 		setTimeout(() => { dispatch(authActions.startupTasks()); }, 100);
+// eslint-disable-next-line
 	}, []);
 
 	const displayUserItem = () => {
@@ -35,7 +39,7 @@ function AuthHeader() {
 			}
 			return <div>
 				<div>{user.display}</div>
-				<button onClick={doLogout}>{localize("LABEL_LOGOUT")}</button>
+				<button className="minimal" aria-label={localize("LABEL_LOGOUT")} title={localize("LABEL_LOGOUT")} onClick={doLogout}><FontAwesomeIcon icon={faRightFromBracket} /></button>
 			</div>
 		} else if (userLoading) {
 			return <div><img src={spinner} alt="Loading..." /></div>
@@ -67,14 +71,26 @@ function AuthHeader() {
 
 			return <form onSubmit={doLogin}>
 			<div>
-				<div>
-					<input type="email" name="email" placeholder={localize("LABEL_EMAIL")} value={userInfo.email} onChange={updateUserInfo}></input>
-					<input type="password" name="password" placeholder={localize("LABEL_PASSWORD")} value={userInfo.password} onChange={updateUserInfo}></input>
-				</div>
-				<div>
-					<button type="submit" disabled={!userInfo.email || !userInfo.password}>{localize("LABEL_LOGIN")}</button>
-					<button type="button" onClick={doSignup}>{localize("LABEL_SIGN_UP")}</button>
-				</div>
+				<input
+					type="email"
+					name="email"
+					placeholder={localize("LABEL_EMAIL")}
+					aria-label={localize("LABEL_EMAIL")}
+					autoComplete="email"
+					value={userInfo.email}
+					onChange={updateUserInfo}>
+				</input>
+				<input
+					type="password"
+					name="password"
+					placeholder={localize("LABEL_PASSWORD")}
+					aria-label={localize("LABEL_PASSWORD")}
+					autoComplete="current-password"
+					value={userInfo.password}
+					onChange={updateUserInfo}>
+				</input>
+				<button className="minimal" type="submit" aria-label={localize("LABEL_LOGIN")} title={localize("LABEL_LOGIN")} disabled={!userInfo.email || !userInfo.password}><FontAwesomeIcon icon={faRightToBracket} /></button>
+				<button className="minimal" type="button" aria-label={localize("LABEL_SIGN_UP")} title={localize("LABEL_SIGN_UP")} onClick={doSignup}><FontAwesomeIcon icon={faUserPlus} /></button>
 			</div>
 			{(authError && !curModal) ? <div className="error">{localize(authError)}</div> : <></>}
 		</form>
@@ -82,6 +98,9 @@ function AuthHeader() {
 	}
 
 	return <header>
+		<button className="top-left minimal">
+			<FontAwesomeIcon icon={faBars} />
+		</button>
 		{displayUserItem()}
 		<h1>{localize("APP_TITLE")}</h1>
 	</header>
