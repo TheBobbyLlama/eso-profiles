@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/eso-profiles/static/css/main.e708d7e3.css",
+    "main.js": "/eso-profiles/static/js/main.ddea7f22.js",
+    "static/js/787.7d62e21c.chunk.js": "/eso-profiles/static/js/787.7d62e21c.chunk.js",
+    "static/media/spinner.gif": "/eso-profiles/static/media/spinner.7b4da7a15287c40931f1.gif",
+    "index.html": "/eso-profiles/index.html",
+    "main.e708d7e3.css.map": "/eso-profiles/static/css/main.e708d7e3.css.map",
+    "main.ddea7f22.js.map": "/eso-profiles/static/js/main.ddea7f22.js.map",
+    "787.7d62e21c.chunk.js.map": "/eso-profiles/static/js/787.7d62e21c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e708d7e3.css",
+    "static/js/main.ddea7f22.js"
+  ]
+}
