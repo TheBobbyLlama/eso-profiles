@@ -64,7 +64,7 @@ function Profile({character, inset}) {
 		characterReadOut.push(localize(mapKey(characterData.sex)));
 
 		if (characterData.class) {
-			characterReadOut.push(localize(`CLASS_${characterData.class.toUpperCase()}`));
+			characterReadOut.push(localize(mapKey(characterData.class)));
 		}
 
 		if (characterData.supernatural) {

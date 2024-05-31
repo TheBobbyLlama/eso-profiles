@@ -29,7 +29,7 @@ function ModalManager() {
 		}
 
 		const clickOff = (e) => {
-			if ((e.target.id == "modalBG") && (ModalComponent.clickOff)) {
+			if ((e.target.id === "modalBG") && (ModalComponent.clickOff)) {
 				dispatch(modalActions.showModal({ key: modalKey.clear }));
 			}
 		}

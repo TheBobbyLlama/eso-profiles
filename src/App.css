@@ -98,18 +98,18 @@ h1 {
   text-align: center;
 }
 
-input {
-  border: solid 1px gray;
-  border-radius: 2px;
+input, select, textarea, .markdown-editor {
+  border: solid 2px gray;
+  border-radius: 4px;
   transition: border-color 0.5s;
 }
 
-input[readonly] {
+input[readonly], textarea[readonly] {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-input:hover, input:active {
-  border-color: var(--interactable);
+input:hover, input:active, select:hover, select:active, textarea:hover, textarea:active, .markdown-editor:hover {
+  border-color: var(--interactable) !important;
 }
 
 main {
@@ -136,6 +136,14 @@ section {
   border: solid 2px var(--panel-border);
   border-radius: 8px;
   padding: 10px 20px;
+}
+
+select:not(disabled) {
+  cursor: pointer;
+}
+
+textarea {
+  resize: none;
 }
 
 #spinner-container {
@@ -180,6 +188,68 @@ section {
   transition: opacity 0.25s;
 }
 
+.mdxeditor-toolbar {
+  background-color: transparent !important;
+  border-radius: 0;
+  padding: 0;
+}
+
+.markdown-input, .markdown-textarea {
+  background-color: white;
+  border: solid 2px gray;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  padding: 2px 8px;
+  z-index: 10;
+}
+
+.markdown-toolbar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.markdown-toolbar > label {
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.markdown-toolbar > div {
+  align-self: flex-end;
+  background-color: var(--panel-inset);
+  border-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: silver;
+  display: flex;
+  margin: 0;
+}
+
+.markdown-toolbar div[role="separator"] {
+  opacity: 25%;
+}
+
+.markdown-toolbar button {
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.markdown-toolbar button svg {
+  max-height: 5vw;
+  max-width: 5vw;
+}
+
+.markdown-toolbar button:disabled {
+  background-color: transparent;
+  color: rgba(128, 128, 128, 0.5);
+}
+
+.markdown-toolbar button:hover {
+  background-color: var(--panel-background);
+  color: white;
+}
+
 .top-left {
 	left: 0;
 	position: absolute;
@@ -202,12 +272,6 @@ section {
     padding: 10px;
   }
 
-  select {
-    height: 32px;
-  }
-}
-
-@media screen and (max-width: 440px) {
   button, input, select {
     height: 28px;
   }

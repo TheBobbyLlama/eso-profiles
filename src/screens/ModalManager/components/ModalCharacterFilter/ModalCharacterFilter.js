@@ -9,10 +9,16 @@ import { charActions } from "../../../../store/slice/characters";
 import { modalActions, modalKey } from "../../../../store/slice/modal";
 
 import charData from "../../../../data/character.json";
+import { htmlDecode } from "../../../../util";
 import { localize } from "../../../../localization";
-import mapKey from "../../../../localization/map";
 
 import "./ModalCharacterFilter.css";
+
+const filterKeys = [
+	"LABEL_GENDER",
+	"LABEL_RACE",
+	"LABEL_SUPERNATURAL",
+]
 
 const getItemFromKey = (key) => {
 	switch (key) {
@@ -76,7 +82,7 @@ function ModalCharacterFilter() {
 		<ResponsiveTabView labels={ [ localize("LABEL_CHARACTERS"), localize("LABEL_PLAYERS") ]}>
 			<div className="character-filter-attributes">
 				{
-					Object.keys(charData).map((key) => {
+					filterKeys.map((key) => {
 						return <div key={key}>
 							<label>{localize(key)}</label>
 							<SelectionList
@@ -94,7 +100,7 @@ function ModalCharacterFilter() {
 				<div>
 					<label>{localize("LABEL_PLAYER")}</label>
 					<SelectionList
-						optionList={Object.values(charList).map(char => char.player.replace(/^(@)?(.*)$/, "$2"))
+						optionList={Object.values(charList).map(char => htmlDecode(char.player.replace(/^(@)?(.*)$/, "$2")))
 							.filter((value, index, array) => { return array.indexOf(value) === index; })
 							.sort((a, b) => a.localeCompare(b, undefined, {sensitivity: "base" }))}
 						optionSelected={filter.player || []}

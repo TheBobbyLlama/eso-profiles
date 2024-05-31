@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import useDelayedSpinner from "../../hooks/useDelayedSpinner";
 import useFade from "../../hooks/useFade";
 
@@ -23,6 +24,7 @@ function Browse() {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth); // Screen resize detection
 	const [curCharacter, setCurCharacter] = useState("");
 	const [pendingCharacter, setPendingCharacter] = useState("");
+	const navigate = useNavigate();
 	const ref = useRef(null);
   	const user = useSelector(authSelectors.user);
 	const characterList = useSelector(charSelectors.list);
@@ -101,6 +103,10 @@ function Browse() {
 		}
 	}
 
+	const createCharacter = () => {
+		navigate(`/create`);
+	}
+
 	const workingList = (() => {
 		if (!characterList) return null;
 
@@ -141,7 +147,7 @@ function Browse() {
 					<div>
 						<h2>{localize("LABEL_CHARACTERS")} <button aria-label={localize("LABEL_CHARACTER_FILTER")} title={localize("LABEL_CHARACTER_FILTER")} onClick={showFilter}><FontAwesomeIcon className="fa-icon" icon={faFilter} /></button></h2>
 					</div>
-					{user && <button aria-label={localize("LABEL_ADD")} title={localize("LABEL_ADD")}>Add</button>}
+					{user && <button aria-label={localize("LABEL_ADD")} title={localize("LABEL_ADD")} onClick={createCharacter}>Add</button>}
 				</div>
 				{(windowWidth > 1000) && <div id="list-holder">
 					<ol title={localize("LABEL_CHARACTER_COUNT", Object.keys(workingList).length)}>

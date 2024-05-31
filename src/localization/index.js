@@ -20,7 +20,7 @@ export const setLocalizationLanguage = async (language) => {
 
 export const localize = (key, ...args) => {
 	let result = localizationData[key] || key;
-	const nestedKeys = result.match(/\[\[.+?\]\]/g);
+	const nestedKeys = (result).match(/\[\[.+?\]\]/g);
 	nestedKeys?.forEach(item => result = result.replaceAll(item, localize(item.substring(2, item.length - 2))));
 
 	args.forEach((value, index) => {

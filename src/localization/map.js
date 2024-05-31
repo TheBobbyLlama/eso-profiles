@@ -1,5 +1,5 @@
 const mapKey =  (rawText) => {
-	switch (rawText.toString().toLowerCase()) {
+	switch (((rawText !== null && rawText !== undefined) ? rawText.toString() : "").toLowerCase()) {
 		case "0":
 			return "GENDER_MALE";
 		case "1":

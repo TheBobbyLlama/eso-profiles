@@ -1,4 +1,82 @@
 {
+	"LABEL_CHARACTER_INFO": [
+		{
+			"key": "LABEL_ALIGNMENT",
+			"path": "profile.alignment"
+		},
+		{
+			"key": "LABEL_BIRTHSIGN",
+			"path": "profile.birthsign"
+		},
+		{
+			"key": "LABEL_ALIASES",
+			"path": "profile.aliases",
+			"maxLength": 256
+		},
+		{
+			"key": "LABEL_PRIMARY_RESIDENCE",
+			"path": "profile.primaryResidence",
+			"maxLength": 256
+		},
+		{
+			"key": "LABEL_ORGANIZATIONS",
+			"path": "profile.organizations",
+			"maxLength": 256
+		},
+		{
+			"key": "LABEL_ALLIANCES",
+			"path": "profile.alliances",
+			"maxLength": 256
+		},
+		{
+			"key": "LABEL_ENEMIES",
+			"path": "profile.enemies",
+			"maxLength": 256
+		},
+		{
+			"key": "LABEL_RELATIONSHIPS",
+			"path": "profile.relationships",
+			"maxLength": 256
+		}
+	],
+	"LABEL_ALIGNMENT": [
+		"LABEL_NOT_SET",
+		"ALIGNMENT_LG",
+		"ALIGNMENT_NG",
+		"ALIGNMENT_CG",
+		"ALIGNMENT_LN",
+		"ALIGNMENT_N",
+		"ALIGNMENT_CN",
+		"ALIGNMENT_LE",
+		"ALIGNMENT_NE",
+		"ALIGNMENT_CE"
+	],
+	"LABEL_BIRTHSIGN": [
+		"LABEL_NOT_SET",
+		"BIRTHSIGN_APPRENTICE",
+		"BIRTHSIGN_ATRONACH",
+		"BIRTHSIGN_LADY",
+		"BIRTHSIGN_LORD",
+		"BIRTHSIGN_LOVER",
+		"BIRTHSIGN_MAGE",
+		"BIRTHSIGN_RITUAL",
+		"BIRTHSIGN_SERPENT",
+		"BIRTHSIGN_SHADOW",
+		"BIRTHSIGN_STEED",
+		 "BIRTHSIGN_THIEF",
+		"BIRTHSIGN_TOWER",
+		"BIRTHSIGN_WARRIOR"
+	],
+	"LABEL_CLASS": [
+		"",
+		"CLASS_ARCANIST",
+		"CLASS_DRAGONKNIGHT",
+		"CLASS_NECROMANCER",
+		"CLASS_NIGHTBLADE",
+		"CLASS_SORCERER",
+		"CLASS_TEMPLAR",
+		"CLASS_WARDEN"
+	],
 	"LABEL_GENDER": [ "GENDER_FEMALE", "GENDER_MALE" ],
 	"LABEL_RACE": [
 		"RACE_ALTMER",
@@ -14,16 +92,6 @@
 		"RACE_KHAJIIT_OHMES",
 		"RACE_MAORMER",
 		"RACE_REACHMAN"
-	],
-	"LABEL_CLASS": [
-		"",
-		"CLASS_ARCANIST",
-		"CLASS_DRAGONKNIGHT",
-		"CLASS_NECROMANCER",
-		"CLASS_NIGHTBLADE",
-		"CLASS_SORCERER",
-		"CLASS_TEMPLAR",
-		"CLASS_WARDEN"
 	],
 	"LABEL_SUPERNATURAL": [
 		"",

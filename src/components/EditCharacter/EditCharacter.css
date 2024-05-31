@@ -1,0 +1,169 @@
+#edit {
+	align-items: center;
+	display: flex;
+	gap: 20px;
+	padding: 0 20px;
+}
+
+#edit h3 {
+	text-align: center;
+}
+
+#edit h3:not(:first-child) {
+	border-top: solid 1px var(--panel-border);
+	margin-top: 20px;
+	padding: 10px 0;
+}
+
+#edit > section {
+	max-width: calc(100% - 20px);
+	position: relative;
+	width: 860px;
+}
+
+#edit > section > h2:first-child {
+	margin-bottom: 10px;
+}
+
+#characterInfo #headerRow {
+	align-items: center;
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+}
+
+#characterInfo #headerRow input {
+	border-radius: 4px;
+	flex-grow: 1;
+	font-size: 1.5rem;
+	max-width: 28rem;
+	min-width: 0;
+}
+
+#characterInfo #attributes {
+	align-items: flex-start;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+#characterInfo #attributes > div {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+#edit #character-image {
+	display: flex;
+	gap: 20px;
+}
+
+#edit #character-image > textarea {
+	height: 5em;
+	width: 100%;
+}
+
+#edit #big-save {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	top: -40px;
+}
+
+#edit #big-save button {
+	height: 2.5em;
+	width: 6em;
+}
+
+#edit #big-save + h3 {
+	margin-top: -16px;
+}
+
+#edit #character-image #image {
+	background-color: rgba(0, 0, 0, 0.375);
+	background-position: center !important;
+	background-size: cover !important;
+	border-radius: min(8px, 2vw);
+	height: calc(100vw - 28px);
+	max-height: 256px;
+	max-width: 256px;
+	width: calc(100vw - 28px);
+}
+
+#edit .character-characteristic {
+	display: flex;
+	flex-direction: column;
+}
+
+#edit .character-characteristic.characteristic-select {
+	flex-direction: row;
+	gap: 10px;
+	justify-content: flex-start;
+}
+
+#edit .character-characteristic.characteristic-select > label {
+	font-weight: bold;
+	min-width: 100px;
+}
+
+#edit .character-characteristic + .character-characteristic {
+	margin-top: 10px;
+}
+
+#edit .invalid {
+	border-color: red;
+	color: red;
+}
+
+#edit .markdown-textarea {
+	height: 20em;
+}
+
+.save-container {
+	position: absolute;
+	right: 20px;
+	top: 12px;
+}
+
+@media screen and (max-width: 800px) {
+	#edit #character-image {
+		align-items: center;
+		flex-direction: column-reverse;
+		gap: 10px;
+	}
+
+	#edit #character-image #image[style=''] {
+		display: none;
+	}
+
+	#edit #big-save {
+		margin-top: 20px;
+		top: 0;
+	}
+	
+	#edit #big-save + h3 {
+		margin-top: 20px;
+	}
+}
+
+@media screen and (max-width: 440px) {
+	#edit {
+		padding: 0 10px;
+	}
+
+	#characterInfo #attributes {
+		justify-content: flex-start;
+	}
+
+	#edit .character-characteristic.characteristic-select {
+		justify-content: space-between;
+	}
+
+	.save-container {
+		right: 10px;
+	}
+}
