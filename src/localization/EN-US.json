@@ -76,6 +76,7 @@
 	"LABEL_OOC_INFO_HELPER": "Include any OOC info for other RPers here",
 	"LABEL_ORGANIZATIONS": "Organizations",
 	"LABEL_ORGANIZATIONS_HELPER": "Any groups your character belongs to",
+	"LABEL_PAGE_NOT_FOUND": "Page Not Found",
 	"LABEL_PASSWORD": "Password",
 	"LABEL_PLAYER": "Player",
 	"LABEL_PLAYERS": "[[LABEL_PLAYER]]s",

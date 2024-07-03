@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { listener } from "../listener";
 import charFuncs from "../../db/characters";
+import dbUtil from "../../db/util";
 
 export const charSlice = createSlice({
 	name: "characters",
@@ -11,14 +12,19 @@ export const charSlice = createSlice({
 	reducers: {
 		loadCharacterList() { },
 		characterListLoaded(state, action) {
-			state.list = action.payload;
+			state.list = {};
+
+			Object.entries(action.payload).forEach(([key, value]) => {
+				state.list[key] = {};
+				state.list[key].character = value;
+			});
 		},
 		loadFullCharacterData(state, action) { },
 		fullCharacterDataLoaded(state, action) {
-			const key = Object.keys(action.payload)[0];
+			const key = dbUtil.transform(action.payload.character?.name);
 
 			if (key) {
-				state.list[key] = action.payload[key];
+				state.list[key] = action.payload;
 			}
 		},
 		loadCharacterProfile(state, action) { },

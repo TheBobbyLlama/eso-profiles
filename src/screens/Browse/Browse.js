@@ -115,23 +115,23 @@ function Browse() {
 		Object.keys(characterList).forEach((character) => {
 			const curChar = characterList[character];
 
-			if ((filter.sex?.length) && (filter.sex.indexOf(mapKey(curChar.sex)) < 0)) {
+			if ((filter.sex?.length) && (filter.sex.indexOf(mapKey(curChar.character.sex)) < 0)) {
 				return;
 			}
 
-			if ((filter.race?.length) && (filter.race.indexOf(mapKey(curChar.race)) < 0)) {
+			if ((filter.race?.length) && (filter.race.indexOf(mapKey(curChar.character.race)) < 0)) {
 				return;
 			}
 
-			if ((filter.class?.length) && (filter.class.indexOf(mapKey(curChar.class)) < 0)) {
+			if ((filter.class?.length) && (filter.class.indexOf(mapKey(curChar.character.class)) < 0)) {
 				return;
 			}
 
-			if ((filter.supernatural?.length) && (filter.supernatural.indexOf(mapKey(curChar.supernatural)) < 0)) {
+			if ((filter.supernatural?.length) && (filter.supernatural.indexOf(mapKey(curChar.character.supernatural)) < 0)) {
 				return;
 			}
 
-			if ((filter.player?.length) && (filter.player.indexOf(curChar.player.match(/(?:@*)([\w]+)/)[1]) < 0))
+			if ((filter.player?.length) && (filter.player.indexOf(curChar.character.player.match(/(?:@*)([\w]+)/)[1]) < 0))
 				return;
 
 			result[character] = curChar;
@@ -152,14 +152,14 @@ function Browse() {
 				{(windowWidth > 1000) && <div id="list-holder">
 					<ol title={localize("LABEL_CHARACTER_COUNT", Object.keys(workingList).length)}>
 						{Object.keys(workingList).map((key) => {
-							return <li key={key} className={(curCharacter === key) ? "selected" : ""} onClick={() => { setCharacter(key) }}>{dbUtil.decode(workingList[key].name)}</li>
+							return <li key={key} className={(curCharacter === key) ? "selected" : ""} onClick={() => { setCharacter(key) }}>{dbUtil.decode(workingList[key].character.name)}</li>
 						})}
 					</ol>
 				</div>}
 				{(windowWidth <= 1000) && <select id="abbr-list" aria-label={localize("LABEL_CHARACTER_LIST")} value={curCharacter} onChange={(e) => { setCharacter(e.target.value)}}>
 					{!curCharacter && <option></option>}
 					{Object.keys(workingList).map((key) => {
-						return <option key={key} className={(curCharacter === key ? "selected" : "")} value={key}>{dbUtil.decode(workingList[key].name)}</option>
+						return <option key={key} className={(curCharacter === key ? "selected" : "")} value={key}>{dbUtil.decode(workingList[key].character.name)}</option>
 					})}
 				</select>}
 			</section>

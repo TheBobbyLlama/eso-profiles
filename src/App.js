@@ -2,7 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './screens/Main/Main';
 import Browse from './screens/Browse/Browse';
 import ViewProfile from './screens/ViewProfile/ViewProfile';
-import Create from './screens/Craete/Create';
+import Create from './screens/Create/Create';
+import Edit from './screens/Edit/Edit';
+import Null from './screens/Null/Null';
 
 import ModalManager from './screens/ModalManager/ModalManager';
 
@@ -19,6 +21,8 @@ function App() {
             <Route index element={<Browse />}></Route>
             <Route path="view/:characterName" element={<ViewProfile />}></Route>
             <Route path="create" element={<Create />}></Route>
+            <Route path="edit/:characterName" element={<Edit />}></Route>
+            <Route path="*" element={<Null />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

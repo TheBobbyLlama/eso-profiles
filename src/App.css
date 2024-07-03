@@ -153,12 +153,23 @@ textarea {
 	background-color: rgba(0, 0, 0, 0.25);
 	bottom: 0;
 	display: flex;
-	justify-content: center;
+  flex-direction: column;
+	justify-content: space-evenly;
 	left: 0;
 	position: absolute;
 	right: 0;
 	top: 0;
   transition: opacity 0.5s;
+}
+
+.auto-scrollable {
+  overflow-y: auto;
+}
+
+.center-me {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .error {

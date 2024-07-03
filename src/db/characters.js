@@ -22,12 +22,12 @@ function getFullCharacterData(key) {
 
 			get(charRef).then(async (charResult) => {
 				if (charResult.exists()) {
-					const charData = { [key]: charResult.val() };
+					const charData = { character: charResult.val() };
 					const profileRef = ref(db, `profiles/${key}`);
 
 					get(profileRef).then(async (profileResult) => {
 						if (profileResult.exists()) {
-							charData[key].profile = profileResult.val();
+							charData.profile = profileResult.val();
 
 							res(charData);
 						} else {

@@ -1,6 +1,7 @@
 import CustomMarkdown from "../CustomMarkdown/CustomMarkdown";
 
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authSelectors } from "../../store/slice/auth";
 import { charSelectors } from "../../store/slice/characters";
@@ -36,6 +37,7 @@ function Profile({character, inset}) {
 	const userName = useSelector(authSelectors.user)?.display;
 	const ref = useRef(null);
 	const fadeTransition = useFade(ref);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (character !== curCharacter) {
@@ -45,11 +47,17 @@ function Profile({character, inset}) {
 					ref.current.scrollIntoView({ behavior: "instant", inline: "start" }); // Scroll profile to top
 			}, character);
 		}
-	}, [character]); // Don't listen to the React linter here, it's stupid and I hate it
+	}, [character]);
 
 	const goCharacterProfile = () => {
 		if (characterData) {
-			window.open(`${getUrlBase()}/view/${characterData.name}`, {});
+			window.open(`${getUrlBase()}/view/${characterData.character.name}`, {});
+		}
+	}
+
+	const goCharacterEdit = () => {
+		if (characterData) {
+			navigate(`/edit/${characterData.character.name}`);
 		}
 	}
 
@@ -57,18 +65,18 @@ function Profile({character, inset}) {
 	const characterCharacteristics = [];
 
 	if (characterData) {
-		if (characterData.race) {
-			characterReadOut.push(localize(mapKey(characterData.race)));
+		if (characterData.character.race) {
+			characterReadOut.push(localize(mapKey(characterData.character.race)));
 		}
 
-		characterReadOut.push(localize(mapKey(characterData.sex)));
+		characterReadOut.push(localize(mapKey(characterData.character.sex)));
 
-		if (characterData.class) {
-			characterReadOut.push(localize(mapKey(characterData.class)));
+		if (characterData.character.class) {
+			characterReadOut.push(localize(mapKey(characterData.character.class)));
 		}
 
-		if (characterData.supernatural) {
-			characterReadOut.push(localize(mapKey(characterData.supernatural)));
+		if (characterData.character.supernatural) {
+			characterReadOut.push(localize(mapKey(characterData.character.supernatural)));
 		}
 
 		if (characterData.profile) {
@@ -79,22 +87,24 @@ function Profile({character, inset}) {
 				}
 			})
 		}
+	} else {
+		return <></>;
 	}
 
-	const ownedByCurrentUser = (characterData?.player === userName);
+	const ownedByCurrentUser = (characterData?.character.player === userName);
 
 	return <div id="profile" ref={ref}>
 		{(characterData?.profile) ? <>
 			<div className="top-left">
-				{(ownedByCurrentUser) && <button className="minimal" aria-label={localize("LABEL_EDIT_CHARACTER")} title={localize("LABEL_EDIT_CHARACTER")}><FontAwesomeIcon icon={faPenToSquare} /></button>}
+				{(ownedByCurrentUser) && <button className="minimal" aria-label={localize("LABEL_EDIT_CHARACTER")} title={localize("LABEL_EDIT_CHARACTER")} onClick={goCharacterEdit}><FontAwesomeIcon icon={faPenToSquare} /></button>}
 				{((ownedByCurrentUser) || (Object.keys(characterData?.stories || {}).length)) ? <button className="minimal" aria-label={localize("LABEL_STORIES")} title={localize("LABEL_STORIES")}><FontAwesomeIcon icon={faBook} /></button> : <></>}
 				{(ownedByCurrentUser) && <button className="minimal" aria-label={localize("LABEL_DELETE_CHARACTER")} title={localize("LABEL_DELETE_CHARACTER")}><FontAwesomeIcon icon={faTrash} /></button>}
 			</div>
 			{inset && <div className="top-right">
 				<button className="minimal" aria-label={localize("LABEL_SHOW_PROFILE")} title={localize("LABEL_SHOW_PROFILE")} onClick={goCharacterProfile}><FontAwesomeIcon icon={faUpRightFromSquare} /></button>
 			</div>}
-			<h1>{dbUtil.decode(characterData.name)}</h1>
-			<div className="player">@{dbUtil.decode(characterData.player)}</div>
+			<h1>{dbUtil.decode(characterData.character.name)}</h1>
+			<div className="player">@{dbUtil.decode(characterData.character.player)}</div>
 			{(characterReadOut.length) ? <ul>
 				{characterReadOut.map((item, index) => {
 					return <li key={index}>{item}</li>

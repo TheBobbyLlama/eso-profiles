@@ -76,7 +76,6 @@ function EditCharacter({create, character}) {
 		}
 		setWorkingChar(newData);
 		setChanged(true);
-		// console.log(newData);
 	}
 
 	const validateCharacterImage = (e) => {
@@ -89,7 +88,6 @@ function EditCharacter({create, character}) {
 		}
 
 		setImageInput(e.target.value);
-		// editCharacter(e);
 	}
 
 	const characterImage = workingChar.profile?.image ? {
@@ -127,7 +125,7 @@ function EditCharacter({create, character}) {
 			<div id="attributes">
 				<div>
 					<label>{localize("LABEL_RACE")}:</label>
-					<select value={getCharacteritem("character.race")} data-path="character.race" onChange={editCharacter}>
+					<select value={mapKey(getCharacteritem("character.race"))} data-path="character.race" onChange={editCharacter}>
 						{charData.LABEL_RACE.map((item) => <option key={item} value={item}>{localize(item)}</option>)}
 					</select>
 				</div>

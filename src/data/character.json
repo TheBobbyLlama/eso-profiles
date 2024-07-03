@@ -15,7 +15,7 @@
 		},
 		{
 			"key": "LABEL_PRIMARY_RESIDENCE",
-			"path": "profile.primaryResidence",
+			"path": "profile.residence",
 			"maxLength": 256
 		},
 		{

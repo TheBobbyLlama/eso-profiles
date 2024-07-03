@@ -14,12 +14,12 @@ function ViewProfile() {
 	const characterData = useSelector(charSelectors.list)[dbUtil.transform(characterName)];
 	const dispatch = useDispatch();
 
-	// Load character data if needed.
+	// Load character data if needed.  This should always trigger?
 	useEffect(() => {
-		if (characterName) {
+		if ((characterName) && (!characterData?.profile)) {
 			dispatch(charActions.loadFullCharacterData(dbUtil.transform(characterName)));
 		}
-	}, [characterName, dispatch]);
+	}, [characterName, characterData, dispatch]);
 
 	// Delay setting current character until data is loaded, for proper fade in.
 	useEffect(() => {
