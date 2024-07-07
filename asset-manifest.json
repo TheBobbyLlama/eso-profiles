@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/eso-profiles/static/css/main.0d7a35c4.css",
-    "main.js": "/eso-profiles/static/js/main.13f800ab.js",
+    "main.js": "/eso-profiles/static/js/main.52943a2b.js",
     "static/js/536.d5c2f492.chunk.js": "/eso-profiles/static/js/536.d5c2f492.chunk.js",
     "static/js/787.7d62e21c.chunk.js": "/eso-profiles/static/js/787.7d62e21c.chunk.js",
     "static/media/spinner.gif": "/eso-profiles/static/media/spinner.7b4da7a15287c40931f1.gif",
     "index.html": "/eso-profiles/index.html",
     "main.0d7a35c4.css.map": "/eso-profiles/static/css/main.0d7a35c4.css.map",
-    "main.13f800ab.js.map": "/eso-profiles/static/js/main.13f800ab.js.map",
+    "main.52943a2b.js.map": "/eso-profiles/static/js/main.52943a2b.js.map",
     "536.d5c2f492.chunk.js.map": "/eso-profiles/static/js/536.d5c2f492.chunk.js.map",
     "787.7d62e21c.chunk.js.map": "/eso-profiles/static/js/787.7d62e21c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0d7a35c4.css",
-    "static/js/main.13f800ab.js"
+    "static/js/main.52943a2b.js"
   ]
 }
