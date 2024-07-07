@@ -33,11 +33,13 @@ const characteristics = [
 
 function Profile({character, inset}) {
 	const [curCharacter, setCurCharacter] = useState(character);
-	const characterData = useSelector(charSelectors.list)[dbUtil.transform(curCharacter)];
+	const characterList = useSelector(charSelectors.list);
 	const userName = useSelector(authSelectors.user)?.display;
 	const ref = useRef(null);
 	const fadeTransition = useFade(ref);
 	const navigate = useNavigate();
+
+	const characterData = characterList[dbUtil.transform(curCharacter)];
 
 	useEffect(() => {
 		if (character !== curCharacter) {
@@ -69,7 +71,9 @@ function Profile({character, inset}) {
 			characterReadOut.push(localize(mapKey(characterData.character.race)));
 		}
 
-		characterReadOut.push(localize(mapKey(characterData.character.sex)));
+		if (characterData.character.sex) {
+			characterReadOut.push(localize(mapKey(characterData.character.sex)));
+		}
 
 		if (characterData.character.class) {
 			characterReadOut.push(localize(mapKey(characterData.character.class)));
@@ -88,7 +92,7 @@ function Profile({character, inset}) {
 			})
 		}
 	} else {
-		return <></>;
+		return <div id="profile" ref={ref}></div>;
 	}
 
 	const ownedByCurrentUser = (characterData?.character.player === userName);

@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { authSelectors } from "../../store/slice/auth";
+import { charActions, charSelectors } from "../../store/slice/characters";
+import { modalActions, modalKey } from "../../store/slice/modal";
 import { localize } from"../../localization";
 import { getUrlBase } from "../../util";
 
@@ -14,14 +16,43 @@ import "./EditCharacter.css";
 
 function EditCharacter({create, character}) {
 	const user = useSelector(authSelectors.user);
+	const characterError = useSelector(charSelectors.error);
+	const dispatch = useDispatch();
 	const [ changeName, setChangeName ] = useState(!!create);
 	const [ changed, setChanged ] = useState(!!create);
 	const [ workingChar, setWorkingChar ] = useState(character || {
+		// Character defaults - race and sex dropdowns default to Altmer and Female, so reflect that here
 		character: {
-			player: user?.display
+			player: user?.display,
+			race: "Altmer",
+			sex: 1,
 		}
 	});
 	const [ imageInput, setImageInput ] = useState(character?.profile?.image || ""); // Store image input separately from workingChar so we can only update onBlur
+
+	useEffect(() => {
+		if (characterError) {
+			dispatch(modalActions.showModal({
+				key: modalKey.generic,
+				data: {
+					title: localize(`LABEL_CHARACTER_CANT_${changeName ? "CREATE" : "SAVE"}_TITLE`),
+					text: localize(characterError),
+					action: charActions.setErrorState(null),
+					error: true,
+				}
+			}));
+		} else {
+			setChangeName(create);	
+		}
+	}, [ characterError, create, dispatch ]);
+
+	// Clear error states if user navigates away.
+	useEffect(() => {
+		return () => {
+			dispatch(modalActions.showModal({ key: modalKey.clear }));
+			dispatch(charActions.setErrorState(null));
+		}
+	}, [ dispatch ])
 
 	// Bail out if not authorized to edit/create this character
 	if ((!user) || (user.display !== workingChar.character.player)) {
@@ -105,6 +136,8 @@ function EditCharacter({create, character}) {
 	const saveCharacterChanges = () => {
 		setChangeName(false);
 		setChanged(false);
+
+		dispatch(charActions.saveCharacter({ data: workingChar, create }));
 	}
 
 	const SaveButton = () => {

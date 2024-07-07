@@ -6,6 +6,7 @@ import dbUtil from "../../db/util";
 export const charSlice = createSlice({
 	name: "characters",
 	initialState: {
+		error: null,
 		filter: {},
 		list: {}
 	},
@@ -38,7 +39,18 @@ export const charSlice = createSlice({
 		},
 		setListFilter(state, action) {
 			state.filter = action.payload;
-		}
+		},
+		saveCharacter() {},
+		saveCharacterComplete(state, action) {
+			const key = dbUtil.transform(action.payload.character?.name);
+
+			if (key) {
+				state.list[key] = action.payload;
+			}
+		},
+		setErrorState(state, action) {
+			state.error = action.payload;
+		},
 	}
 });
 
@@ -50,6 +62,9 @@ export const charSelectors = {
 	},
 	list: (state) => {
 		return state.characters.list;
+	},
+	error: (state) => {
+		return state.characters.error;
 	}
 }
 
@@ -83,5 +98,23 @@ listener.startListening({
 		})
 	}
 });
+
+listener.startListening({
+	actionCreator: charActions.saveCharacter,
+	effect: async (action, listenerApi) => {
+		try {
+			const canSave = await charFuncs.canSaveCharacter(dbUtil.transform(action.payload.data.character.name), action.payload.data.character.player, !!action.payload.create);
+
+			if (!canSave) {
+				listenerApi.dispatch(charActions.setErrorState(action.payload.create ? "LABEL_CHARACTER_CANT_CREATE" : "LABEL_CHARACTER_CANT_SAVE"));
+			} else {
+				await charFuncs.saveCharacter(action.payload.data);
+				listenerApi.dispatch(charActions.saveCharacterComplete(action.payload.data));
+			}
+		} catch (e) {
+			listenerApi.dispatch(charActions.setErrorState(e.toString()));
+		}
+	}
+})
 
 export default charSlice.reducer;

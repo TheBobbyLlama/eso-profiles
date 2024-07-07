@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 const useFade = (ref) => {
 	const [fadeOut, setFadeOut] = useState(-1);
-	const [transition, setTransition] = useState(false);
+	const [transition, setTransition] = useState(false); // Indicates that this is a fade out -> fade in sequence
 
 	useEffect(() => {
 		if (ref?.current) {
@@ -17,15 +17,15 @@ const useFade = (ref) => {
 			}
 
 			switch(fadeOut) {
-				case 1:
+				case 1: // Fading in
 					ref.current.className = ref.current.className.replace(/ fade-(in|out)\b/g, "") + " fade-in";
 					setTimeout(setFadeOut, 500, 0);
 					break;
-				case 2:
+				case 2: // Fading out
 					ref.current.className = ref.current.className.replace(/ fade-(in|out)\b/g, "") + " fade-out";
 					setTimeout(setFadeOut, 250, transition ? -1 : 0);
 					break;
-				case -1:
+				case -1: // Immediately fade back in
 					ref.current.className = ref.current.className.replace(/ fade-(in|out)\b/g, "");
 					setFadeOut(1);
 					setTransition(false);
@@ -38,15 +38,13 @@ const useFade = (ref) => {
 	}, [ref?.current, fadeOut]);
 
 	return (func, ...args) => {
-		if (fadeOut !== 2) {
-			setFadeOut(2);
+		setFadeOut(2);
 
-			if (func) {
-				setTransition(true);
-				setTimeout((...args) => {
-					func(...args);
-				}, 250, ...args);
-			}
+		if (func) {
+			setTransition(true);
+			setTimeout((...args) => {
+				func(...args);
+			}, 250, ...args);
 		}
 	}
 }

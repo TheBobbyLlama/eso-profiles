@@ -100,7 +100,7 @@ function ModalCharacterFilter() {
 				<div>
 					<label>{localize("LABEL_PLAYER")}</label>
 					<SelectionList
-						optionList={Object.values(charList).map(char => htmlDecode(char.player.replace(/^(@)?(.*)$/, "$2")))
+						optionList={Object.values(charList).map(char => htmlDecode(char.character.player.replace(/^(@)?(.*)$/, "$2")))
 							.filter((value, index, array) => { return array.indexOf(value) === index; })
 							.sort((a, b) => a.localeCompare(b, undefined, {sensitivity: "base" }))}
 						optionSelected={filter.player || []}

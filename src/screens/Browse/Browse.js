@@ -145,12 +145,12 @@ function Browse() {
 			<section id="character-list">
 				<div className="list-header">
 					<div>
-						<h2>{localize("LABEL_CHARACTERS")} <button aria-label={localize("LABEL_CHARACTER_FILTER")} title={localize("LABEL_CHARACTER_FILTER")} onClick={showFilter}><FontAwesomeIcon className="fa-icon" icon={faFilter} /></button></h2>
+						<h2 title={localize("LABEL_CHARACTER_COUNT", Object.keys(workingList).length)}>{localize("LABEL_CHARACTERS")} <button aria-label={localize("LABEL_CHARACTER_FILTER")} title={localize("LABEL_CHARACTER_FILTER")} onClick={showFilter}><FontAwesomeIcon className="fa-icon" icon={faFilter} /></button></h2>
 					</div>
 					{user && <button aria-label={localize("LABEL_ADD")} title={localize("LABEL_ADD")} onClick={createCharacter}>Add</button>}
 				</div>
 				{(windowWidth > 1000) && <div id="list-holder">
-					<ol title={localize("LABEL_CHARACTER_COUNT", Object.keys(workingList).length)}>
+					<ol>
 						{Object.keys(workingList).map((key) => {
 							return <li key={key} className={(curCharacter === key) ? "selected" : ""} onClick={() => { setCharacter(key) }}>{dbUtil.decode(workingList[key].character.name)}</li>
 						})}

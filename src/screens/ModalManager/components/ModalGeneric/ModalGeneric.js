@@ -47,7 +47,7 @@ function ModalGeneric() {
 			modalData.text.map((item, index) => generateTextMarkup(item, index)) : generateTextMarkup(modalData.text)}
 		<div>
 			<button onClick={doAction}>{modalData.buttonLabel || localize("LABEL_OK")}</button>
-			{modalData.action && <button onClick={cancelAction}>{localize("LABEL_CANCEL")}</button>}
+			{modalData.action && !modalData.error && <button onClick={cancelAction}>{localize("LABEL_CANCEL")}</button>}
 		</div>
 	</section>;
 }
