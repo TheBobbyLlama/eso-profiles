@@ -115,6 +115,10 @@ function Browse() {
 		Object.keys(characterList).forEach((character) => {
 			const curChar = characterList[character];
 
+			if ((curChar.character.emptyProfile) && (user?.display !== curChar.character.player)) {
+				return;
+			}
+
 			if ((filter.sex?.length) && (filter.sex.indexOf(mapKey(curChar.character.sex)) < 0)) {
 				return;
 			}

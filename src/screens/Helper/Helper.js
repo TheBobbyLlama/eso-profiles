@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { localize } from "../../localization";
-import { getUrlBase } from "../../util";
 
 import "./Helper.css";
 
@@ -15,10 +14,10 @@ function RPHelper() {
 
 	const changeInput = (e) => {
 		const textChunks = [];
-		var inputMe = e.target.value || "";
+		let inputMe = e.target.value || "";
 
-		var start = 0;
-		var end = start + 348;
+		let start = 0;
+		let end = start + 348;
 
 		// Loop to break apart input text...
 		while (end < inputMe.length - 1) {
@@ -32,7 +31,7 @@ function RPHelper() {
 				}
 			}
 
-			var tmpText = inputMe.substring(start, end).trim()
+			let tmpText = inputMe.substring(start, end).trim()
 
 			if (textChunks.length) {
 				tmpText = "+ " + tmpText;

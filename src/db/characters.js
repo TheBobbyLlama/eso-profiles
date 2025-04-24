@@ -74,6 +74,20 @@ async function canSaveCharacter(key, user, create) {
 	}
 }
 
+async function canDeleteCharacter(key, user) {
+	if (!key) throw new Error("canSaveCharacter: No character key!");
+	if (!user) throw new Error("canSaveCharacter: No user!");
+
+	const characterRef = ref(db, `characters/${key}`);
+	const result = await get(characterRef);
+
+	if (result.exists()) {
+		return result.val().player === user;
+	} else {
+		return false;
+	}
+}
+
 async function addCharacterToAccountList(user, characterName) {
 	if (!user) throw new Error("addCharacterToAccountList: No user!");
 	if (!characterName) throw new Error("addCharacterToAccountList: No name!");
@@ -135,6 +149,7 @@ function deleteCharacter(characterName, user) {
 
 const characterFuncs = {
 	canSaveCharacter,
+	canDeleteCharacter,
 	deleteCharacter,
 	getAllCharacterData,
 	getFullCharacterData,

@@ -9,6 +9,7 @@ import "./ModalSignUp.css";
 
 function ModalSignup() {
 	const [ userInfo, setUserInfo ] = useState({displayName: "", email: "", password: "" });
+	const [ passwordConfirm, setPasswordConfirm ] = useState("");
 	const authBusy = useSelector(authSelectors.busy);
 	const authUser = useSelector(authSelectors.user);
 	const authError = useSelector(authSelectors.error);
@@ -50,10 +51,11 @@ function ModalSignup() {
 		<form onSubmit={doSignup}>
 			<input type="text" name="displayName" placeholder={localize("LABEL_ACCOUNT_NAME")} onChange={updateUserInfo} value={userInfo.displayName}></input>
 			<input type="email" name="email" placeholder={localize("LABEL_EMAIL")} onChange={updateUserInfo} value={userInfo.email}></input>
-			<input type="password" name="password" placeholder={localize("LABEL_PASSWORD")} onChange={updateUserInfo} value={userInfo.password}></input>
+			<input type="password" className={userInfo.password !== passwordConfirm ? "error" : ""} name="password" placeholder={localize("LABEL_PASSWORD")} onChange={updateUserInfo} value={userInfo.password}></input>
+			<input type="password" className={userInfo.password !== passwordConfirm ? "error" : ""} name="password-confirm" placeholder={localize("LABEL_PASSWORD_CONFIRM")} onChange={(e) => {setPasswordConfirm(e.target.value)}} value={passwordConfirm}></input>
 			{authError && <div className="error">{localize(authError)}</div>}
 			<div>
-				<button type="submit" disabled={authBusy || !userInfo.displayName || !userInfo.email || !userInfo.password}>{localize("LABEL_OK")}</button>
+				<button type="submit" disabled={authBusy || !userInfo.displayName || !userInfo.email || !userInfo.password || userInfo.password !== passwordConfirm}>{localize("LABEL_OK")}</button>
 				<button disabled={authBusy} onClick={clearModal}>{localize("LABEL_CANCEL")}</button>
 			</div>
 		</form>

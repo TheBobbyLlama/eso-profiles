@@ -5,9 +5,9 @@ import { getDatabase } from "firebase/database";
 const scramble = [ "AIz", "8dl", "0fr", "DcR", "aSy", "3ix", "Zxt", "N1b", "Ake", "FEM", "cNu", "YPo", "vKU" ];
 
 function buildKey() {
-	var result = "";
+	let result = "";
 
-	for (var i = 0; i < scramble.length; i++) {
+	for (let i = 0; i < scramble.length; i++) {
 		result += scramble[(17 * i) % scramble.length];
 	}
 

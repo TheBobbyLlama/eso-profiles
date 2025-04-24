@@ -48,6 +48,14 @@ export const charSlice = createSlice({
 				state.list[key] = action.payload;
 			}
 		},
+		deleteCharacter() {},
+		deleteCharacterComplete(state, action) {
+			const key = dbUtil.transform(action.payload);
+
+			if (key) {
+				delete state.list[key];
+			}
+		},
 		setErrorState(state, action) {
 			state.error = action.payload;
 		},
@@ -110,6 +118,24 @@ listener.startListening({
 			} else {
 				await charFuncs.saveCharacter(action.payload.data);
 				listenerApi.dispatch(charActions.saveCharacterComplete(action.payload.data));
+			}
+		} catch (e) {
+			listenerApi.dispatch(charActions.setErrorState(e.toString()));
+		}
+	}
+})
+
+listener.startListening({
+	actionCreator: charActions.deleteCharacter,
+	effect: async (action, listenerApi) => {
+		try {
+			const canDelete = await charFuncs.canDeleteCharacter(dbUtil.transform(action.payload.character.name), action.payload.character.player);
+
+			if (!canDelete) {
+				listenerApi.dispatch(charActions.setErrorState("LABEL_CHARACTER_CANT_DELETE"));
+			} else {
+				await charFuncs.deleteCharacter(action.payload.character.name, action.payload.character.player);
+				listenerApi.dispatch(charActions.deleteCharacterComplete(action.payload.character.name));
 			}
 		} catch (e) {
 			listenerApi.dispatch(charActions.setErrorState(e.toString()));

@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authSelectors } from "../../store/slice/auth";
-import { charSelectors } from "../../store/slice/characters";
+import { charActions, charSelectors } from "../../store/slice/characters";
+import { modalKey, modalActions, modalSelectors } from "../../store/slice/modal";
+import { useDispatch } from "react-redux";
 
 import dbUtil from "../../db/util";
 import mapKey from "../../localization/map";
@@ -14,7 +16,7 @@ import { localize } from "../../localization";
 import { getUrlBase } from "../../util";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faPenToSquare, faTrash, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 import "./Profile.css";
 
@@ -38,6 +40,7 @@ function Profile({character, inset}) {
 	const ref = useRef(null);
 	const fadeTransition = useFade(ref);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const characterData = characterList[dbUtil.transform(curCharacter)];
 
@@ -61,6 +64,17 @@ function Profile({character, inset}) {
 		if (characterData) {
 			navigate(`/edit/${characterData.character.name}`);
 		}
+	}
+
+	const promptCharacterDelete = () => {
+		dispatch(modalActions.showModal({
+			key: modalKey.generic,
+			data: {
+				title: localize("LABEL_CHARACTER_DELETE_TITLE"),
+				text: localize("LABEL_CHARACTER_DELETE", characterData.character.name),
+				action: charActions.deleteCharacter(characterData)
+			}
+		}));
 	}
 
 	const characterReadOut = [];
@@ -101,7 +115,7 @@ function Profile({character, inset}) {
 		{(characterData?.profile) ? <>
 			{(ownedByCurrentUser) && <div className="top-left">
 				<button className="minimal" aria-label={localize("LABEL_EDIT_CHARACTER")} title={localize("LABEL_EDIT_CHARACTER")} onClick={goCharacterEdit}><FontAwesomeIcon icon={faPenToSquare} /></button>
-				<button className="minimal" aria-label={localize("LABEL_DELETE_CHARACTER")} title={localize("LABEL_DELETE_CHARACTER")}><FontAwesomeIcon icon={faTrash} /></button>
+				<button className="minimal" aria-label={localize("LABEL_DELETE_CHARACTER")} title={localize("LABEL_DELETE_CHARACTER")} onClick={promptCharacterDelete}><FontAwesomeIcon icon={faTrash} /></button>
 			</div>}
 			{inset && <div className="top-right">
 				<button className="minimal" aria-label={localize("LABEL_SHOW_PROFILE")} title={localize("LABEL_SHOW_PROFILE")} onClick={goCharacterProfile}><FontAwesomeIcon icon={faUpRightFromSquare} /></button>

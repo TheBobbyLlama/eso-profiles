@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { localize } from "../../localization";
-import nameData from "../../assets/data/Names.json";
+import nameData from "../../data/names.json";
 import { generateNames } from "../../util/namegeneration";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

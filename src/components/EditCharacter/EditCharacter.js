@@ -26,6 +26,7 @@ function EditCharacter({create, character}) {
 			player: user?.display,
 			race: "Altmer",
 			sex: 1,
+			emptyProfile: true,
 		}
 	});
 	const [ imageInput, setImageInput ] = useState(character?.profile?.image || ""); // Store image input separately from workingChar so we can only update onBlur
@@ -105,6 +106,11 @@ function EditCharacter({create, character}) {
 		} else {
 			curData[path[i]] = newValue;
 		}
+
+		if ((newData.profile) && (Object.entries(newData.profile).length)) {
+			delete newData.character.emptyProfile;
+		}
+
 		setWorkingChar(newData);
 		setChanged(true);
 	}
