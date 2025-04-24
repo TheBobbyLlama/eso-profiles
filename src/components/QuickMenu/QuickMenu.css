@@ -1,0 +1,63 @@
+#quick-menu-holder {
+	animation-duration: 0.25s;
+	animation-name: quick-menu-holder-fade;
+	background-color: rgba(0, 0, 0, 0.25);
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 1000;
+}
+
+#quick-menu {
+	animation-duration: 1s;
+	animation-name: quick-menu-open;
+	background-color: var(--panel-background);
+	border-bottom-right-radius: 4px;
+	color: var(--text-color);
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	padding: 8px 24px 8px 8px;
+}
+
+#quick-menu ul {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+}
+
+#quick-menu li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#quick-menu li > a {
+	border-radius: 2px;
+	display: block;
+	padding: 2px 8px;
+	text-align: center;
+	text-decoration: none;
+	transition: background-color 0.5s;
+	width: 100%;
+}
+
+#quick-menu li > a:hover {
+	background-color: rgba(255, 255, 255, 0.05);
+	color: var(--link-color);
+	text-decoration: underline;
+}
+
+@keyframes quick-menu-holder-fade {
+	from {background-color: rgba(0, 0, 0, 0);}
+	to {background-color: rgba(0, 0, 0, 0.25);}
+}
+
+@keyframes quick-menu-open {
+	from {max-height: 1px;}
+	to {max-height: 100vh;}
+}

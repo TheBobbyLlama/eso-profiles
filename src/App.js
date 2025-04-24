@@ -4,6 +4,8 @@ import Browse from './screens/Browse/Browse';
 import ViewProfile from './screens/ViewProfile/ViewProfile';
 import Create from './screens/Create/Create';
 import Edit from './screens/Edit/Edit';
+import RPHelper from './screens/Helper/Helper';
+import NameGenerator from './screens/NameGenerator/NameGenerator';
 import Null from './screens/Null/Null';
 
 import ModalManager from './screens/ModalManager/ModalManager';
@@ -22,6 +24,8 @@ function App() {
             <Route path="view/:characterName" element={<ViewProfile />}></Route>
             <Route path="create" element={<Create />}></Route>
             <Route path="edit/:characterName" element={<Edit />}></Route>
+            <Route path="helper" element={<RPHelper />}></Route>
+            <Route path="name-generator" element={<NameGenerator />}></Route>
             <Route path="*" element={<Null />}></Route>
           </Route>
         </Routes>

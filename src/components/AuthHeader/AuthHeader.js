@@ -8,6 +8,8 @@ import { localize } from "../../localization";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faRightFromBracket, faRightToBracket, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
+import QuickMenu from "../QuickMenu/QuickMenu";
+
 import spinner from "../../assets/images/spinner.gif";
 import "./AuthHeader.css";
 
@@ -18,6 +20,7 @@ function AuthHeader() {
 	const curModal = useSelector(modalSelectors.key);
 	const dispatch = useDispatch();
 
+	const [ quickMenuOpen, displayQuickMenu ] = useState(false);
 	const [ userInfo, setUserInfo ] = useState({ email: "", password: "" });
 
 	useEffect(() => {
@@ -98,9 +101,10 @@ function AuthHeader() {
 	}
 
 	return <header>
-		<button className="top-left minimal">
+		<button className="top-left minimal" onClick={() => displayQuickMenu(true)} title={localize("LABEL_QUICKMENU")} aria-label={localize("LABEL_QUICKMENU")}>
 			<FontAwesomeIcon icon={faBars} />
 		</button>
+		{quickMenuOpen && <QuickMenu displayFunc={displayQuickMenu} />}
 		{displayUserItem()}
 		<h1>{localize("APP_TITLE")}</h1>
 	</header>

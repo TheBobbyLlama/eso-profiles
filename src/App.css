@@ -105,7 +105,7 @@ input, select, textarea, .markdown-editor {
 }
 
 input[readonly], textarea[readonly] {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 input:hover, input:active, select:hover, select:active, textarea:hover, textarea:active, .markdown-editor:hover {

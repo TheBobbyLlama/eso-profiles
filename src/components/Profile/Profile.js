@@ -99,11 +99,10 @@ function Profile({character, inset}) {
 
 	return <div id="profile" ref={ref}>
 		{(characterData?.profile) ? <>
-			<div className="top-left">
-				{(ownedByCurrentUser) && <button className="minimal" aria-label={localize("LABEL_EDIT_CHARACTER")} title={localize("LABEL_EDIT_CHARACTER")} onClick={goCharacterEdit}><FontAwesomeIcon icon={faPenToSquare} /></button>}
-				{((ownedByCurrentUser) || (Object.keys(characterData?.stories || {}).length)) ? <button className="minimal" aria-label={localize("LABEL_STORIES")} title={localize("LABEL_STORIES")}><FontAwesomeIcon icon={faBook} /></button> : <></>}
-				{(ownedByCurrentUser) && <button className="minimal" aria-label={localize("LABEL_DELETE_CHARACTER")} title={localize("LABEL_DELETE_CHARACTER")}><FontAwesomeIcon icon={faTrash} /></button>}
-			</div>
+			{(ownedByCurrentUser) && <div className="top-left">
+				<button className="minimal" aria-label={localize("LABEL_EDIT_CHARACTER")} title={localize("LABEL_EDIT_CHARACTER")} onClick={goCharacterEdit}><FontAwesomeIcon icon={faPenToSquare} /></button>
+				<button className="minimal" aria-label={localize("LABEL_DELETE_CHARACTER")} title={localize("LABEL_DELETE_CHARACTER")}><FontAwesomeIcon icon={faTrash} /></button>
+			</div>}
 			{inset && <div className="top-right">
 				<button className="minimal" aria-label={localize("LABEL_SHOW_PROFILE")} title={localize("LABEL_SHOW_PROFILE")} onClick={goCharacterProfile}><FontAwesomeIcon icon={faUpRightFromSquare} /></button>
 			</div>}

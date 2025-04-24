@@ -1,0 +1,68 @@
+#rp-helper {
+	margin: 0 20px;
+}
+
+#rp-helper h2, #rp-helper h3 {
+	text-align: center;
+}
+
+#rp-helper .rp-helper-text {
+	display: flex;
+	height: 400px;
+	justify-content: center;
+}
+
+#rp-helper .rp-helper-text > div {
+	display: flex;
+	flex-direction: column;
+	margin: 0 20px 10px 20px;
+	width: 100%;
+}
+
+#rp-helper .rp-helper-text > div textarea {
+	height: 100%;
+	width: 100%;
+}
+
+#rp-helper .output > *:nth-child(2) {
+	flex-basis: 100%;
+}
+
+#rp-helper .output > *:last-child {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	padding-top: 20px;
+}
+
+#rp-helper .output > *:last-child > * {
+	margin: 0 20px;
+}
+
+#rp-helper .output > *:last-child > *:first-child {
+	white-space: nowrap;
+}
+
+#rp-helper .output > *:last-child span {
+	margin: 0 8px;
+	user-select: none;
+}
+
+#rp-helper .rp-helper-notes {
+	padding: 0 20px;
+}
+
+#rp-helper .rp-helper-notes textarea {
+	height: 300px;
+	width: 100%;
+}
+
+@media screen and ((max-height: 575px) or (max-width: 575px)) {
+	#rp-helper .rp-helper-text {
+		display: none;
+	}
+
+	#rp-helper .rp-helper-notes {
+		padding: 0 10px;
+	}
+}
