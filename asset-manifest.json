@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/eso-profiles/static/css/main.dbfe675c.css",
-    "main.js": "/eso-profiles/static/js/main.84467d51.js",
+    "main.js": "/eso-profiles/static/js/main.fe1aeea7.js",
     "static/js/536.d5c2f492.chunk.js": "/eso-profiles/static/js/536.d5c2f492.chunk.js",
     "static/js/787.7d62e21c.chunk.js": "/eso-profiles/static/js/787.7d62e21c.chunk.js",
     "static/media/spinner.gif": "/eso-profiles/static/media/spinner.7b4da7a15287c40931f1.gif",
     "index.html": "/eso-profiles/index.html",
     "main.dbfe675c.css.map": "/eso-profiles/static/css/main.dbfe675c.css.map",
-    "main.84467d51.js.map": "/eso-profiles/static/js/main.84467d51.js.map",
+    "main.fe1aeea7.js.map": "/eso-profiles/static/js/main.fe1aeea7.js.map",
     "536.d5c2f492.chunk.js.map": "/eso-profiles/static/js/536.d5c2f492.chunk.js.map",
     "787.7d62e21c.chunk.js.map": "/eso-profiles/static/js/787.7d62e21c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dbfe675c.css",
-    "static/js/main.84467d51.js"
+    "static/js/main.fe1aeea7.js"
   ]
 }
