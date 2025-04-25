@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { authActions, authSelectors } from "../../store/slice/auth";
 import { modalKey, modalActions, modalSelectors } from "../../store/slice/modal";
@@ -19,6 +20,10 @@ function AuthHeader() {
 	const authError = useSelector(authSelectors.error);
 	const curModal = useSelector(modalSelectors.key);
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	console.log(location);
 
 	const [ quickMenuOpen, displayQuickMenu ] = useState(false);
 	const [ userInfo, setUserInfo ] = useState({ email: "", password: "" });
@@ -100,13 +105,19 @@ function AuthHeader() {
 		}
 	}
 
+	const goToRoot = () => {
+		if (location.pathname !== "/") {
+			navigate("/");
+		}
+	}
+
 	return <header>
 		<button className="top-left minimal" onClick={() => displayQuickMenu(true)} title={localize("LABEL_QUICKMENU")} aria-label={localize("LABEL_QUICKMENU")}>
 			<FontAwesomeIcon icon={faBars} />
 		</button>
 		{quickMenuOpen && <QuickMenu displayFunc={displayQuickMenu} />}
 		{displayUserItem()}
-		<h1>{localize("APP_TITLE")}</h1>
+		<h1><div className={location.pathname === "/" ? "" : "clickable"} onClick={goToRoot} title={location.pathname === "/" ? "" : localize("LABEL_RETURN_HOME")}>{localize("APP_TITLE")}</div></h1>
 	</header>
 }
 

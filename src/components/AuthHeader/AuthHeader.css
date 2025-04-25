@@ -40,19 +40,36 @@ header form > div {
 }
   
 header h1 {
+	display: flex;
+	justify-content: center;
 	margin: 0;
 	text-align: center;
 }
 
-header h1::before {
-	/* background-image: url('./assets/images/RPTP.png'); */
+header h1 > div {
+	padding: 0 20px;
+}
+
+header h1 > div.clickable {
+	cursor: pointer;
+	flex-shrink: 1;
+	transition: color 0.25s;
+}
+
+header h1 > div.clickable:hover {
+	color: var(--interactable);
+	text-decoration: underline;
+}
+
+header h1 > div::before {
+	background-image: url('../../assets/images/logo192.png');
 	background-size: cover;
 	content: '';
 	display: inline-block;
 	position: relative;
 	height: 1.25em;
-	left: -0.2em;
-	top: 0.2em;
+	left: -0.25em;
+	top: 0.25em;
 	width: 1.25em;
 }
 
