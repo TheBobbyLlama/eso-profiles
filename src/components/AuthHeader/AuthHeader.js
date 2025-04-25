@@ -23,8 +23,6 @@ function AuthHeader() {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	console.log(location);
-
 	const [ quickMenuOpen, displayQuickMenu ] = useState(false);
 	const [ userInfo, setUserInfo ] = useState({ email: "", password: "" });
 

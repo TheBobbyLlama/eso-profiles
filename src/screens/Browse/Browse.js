@@ -135,7 +135,7 @@ function Browse() {
 				return;
 			}
 
-			if ((filter.player?.length) && (filter.player.indexOf(curChar.character.player.match(/(?:@*)([\w]+)/)[1]) < 0))
+			if ((filter.player?.length) && (filter.player.indexOf(curChar.character.player.match(/(?:@*)([\w-.]+)/)[1]) < 0))
 				return;
 
 			result[character] = curChar;
