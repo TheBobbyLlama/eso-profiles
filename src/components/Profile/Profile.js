@@ -113,7 +113,7 @@ function Profile({character, inset}) {
 
 	return <div id="profile" ref={ref}>
 		{(characterData?.profile) ? <>
-			{(ownedByCurrentUser) && <div className="top-left">
+			{(ownedByCurrentUser) && (inset) && <div className="top-left">
 				<button className="minimal" aria-label={localize("LABEL_EDIT_CHARACTER")} title={localize("LABEL_EDIT_CHARACTER")} onClick={goCharacterEdit}><FontAwesomeIcon icon={faPenToSquare} /></button>
 				<button className="minimal" aria-label={localize("LABEL_DELETE_CHARACTER")} title={localize("LABEL_DELETE_CHARACTER")} onClick={promptCharacterDelete}><FontAwesomeIcon icon={faTrash} /></button>
 			</div>}
