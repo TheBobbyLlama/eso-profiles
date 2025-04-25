@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authSelectors } from "../../store/slice/auth";
 import { charActions, charSelectors } from "../../store/slice/characters";
-import { modalKey, modalActions, modalSelectors } from "../../store/slice/modal";
+import { modalKey, modalActions } from "../../store/slice/modal";
 import { useDispatch } from "react-redux";
 
 import dbUtil from "../../db/util";

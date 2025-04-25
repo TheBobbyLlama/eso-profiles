@@ -1,14 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 import { localize } from "../../localization";
 import { getUrlBase } from "../../util";
 
 import "./QuickMenu.css";
 
 function QuickMenu({displayFunc}) {
-	const navigate = useNavigate();
-
 	return <div id="quick-menu-holder" onClick={() => displayFunc(false)}>
 		<div id="quick-menu">
 			<ul>
