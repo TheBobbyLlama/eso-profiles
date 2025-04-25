@@ -1,7 +1,7 @@
 {
   "name": "eso-profiles",
   "version": "0.1.0",
-  "homepage": "https://thebobbyllama.github.io/eso-profiles",
+  "homepage": "https://eso-profiles.net/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
