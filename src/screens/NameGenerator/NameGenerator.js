@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { localize } from "../../localization";
 import nameData from "../../data/names.json";
@@ -27,6 +27,10 @@ function NameGenerator() {
 	const generatedNames = generateNames(nameData, { category: curRace, subcategory: curGender, filters: curFilters }, 50);
 	generatedNames.sort();
 
+	useEffect(() => {
+		document.title = `${localize("LABEL_NAME_GENERATOR")} - ${localize("APP_TITLE")}`;
+	}, []);
+
 	const toggleFilter = (e) => {
 		let curElement = e.target;
 
@@ -50,7 +54,7 @@ function NameGenerator() {
 	}
 
 	return <section id="name-generator">
-		<h2>Name Generator</h2>
+		<h2>{localize("LABEL_NAME_GENERATOR")}</h2>
 		<div className="name-info">
 			<div>
 				<div>

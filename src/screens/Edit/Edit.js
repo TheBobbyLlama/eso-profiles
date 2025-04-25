@@ -18,8 +18,12 @@ function Edit() {
 
 	// Load character data if needed.
 	useEffect(() => {
-		if ((characterName) && (!characterData?.profile)) {
-			dispatch(charActions.loadFullCharacterData(dbUtil.transform(characterName)));
+		if (characterName) {
+			if (!characterData?.profile) {
+				dispatch(charActions.loadFullCharacterData(dbUtil.transform(characterName)));
+			}
+
+			document.title = `${localize("LABEL_CHARACTER_EDIT")} - ${characterName} - ${localize("APP_TITLE")}`;
 		}
 	}, [characterName, dispatch]);
 
@@ -29,8 +33,6 @@ function Edit() {
 			setFadeClass("fade fade-in");
 		}
 	}, [ characterData, characterName ]);
-
-	document.title = (characterName) ? `${characterName} - ${localize("APP_TITLE")}` : localize("APP_TITLE");
 
 	if (characterData) {
 		return <div className={`auto-scrollable ${fadeClass}`}>

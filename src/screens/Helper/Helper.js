@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { localize } from "../../localization";
 
@@ -11,6 +11,10 @@ function RPHelper() {
 	const [outputData, setOutputData] = useState([]);
 	const [outputPanel, setOutputPanel] = useState(0);
 	const [notesText, setNotesText] = useState(localStorage.getItem(noteStorageToken));
+
+	useEffect(() => {
+		document.title = `${localize("LABEL_RP_HELPER")} - ${localize("APP_TITLE")}`;
+	}, []);
 
 	const changeInput = (e) => {
 		const textChunks = [];
