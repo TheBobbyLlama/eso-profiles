@@ -15,8 +15,10 @@ import useFade from "../../hooks/useFade";
 import { localize } from "../../localization";
 import { getUrlBase } from "../../util";
 
+import MarkdownTextArea from "../Markdown/MarkdownTextArea";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faPenToSquare, faTrash, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 import "./Profile.css";
 
@@ -35,6 +37,9 @@ const characteristics = [
 
 function Profile({character, inset}) {
 	const [curCharacter, setCurCharacter] = useState(character);
+	const [editNotes, setEditNotes] = useState(false);
+	const [workingNotes, setWorkingNotes] = useState("");
+	const [changed, setChanged] = useState(false);
 	const characterList = useSelector(charSelectors.list);
 	const userName = useSelector(authSelectors.user)?.display;
 	const ref = useRef(null);
@@ -75,6 +80,24 @@ function Profile({character, inset}) {
 				action: charActions.deleteCharacter(characterData)
 			}
 		}));
+	}
+
+	const toggleEditMode = () => {
+		if (!editNotes) {
+			setWorkingNotes(characterData.notes);
+			setChanged(false);
+		}
+
+		setEditNotes(!editNotes);
+	}
+
+	const saveNotes = () => {
+		dispatch(charActions.updateCharacterNotes({ character: characterData.character.name, notes: workingNotes }));
+		setChanged(false);
+	}
+
+	const SaveButton = () => {
+		return <button onClick={saveNotes} disabled={!changed }>{localize("LABEL_SAVE")}</button>
 	}
 
 	const characterReadOut = [];
@@ -154,6 +177,20 @@ function Profile({character, inset}) {
 						text={characterData.profile.oocInfo}
 					/>
 				</section>
+			</> : <></>}
+			{(characterData.character.player === userName) ? <>
+				<h2>{localize("LABEL_NOTES")} <button className="minimal" onClick={toggleEditMode}><FontAwesomeIcon icon={faPen} /></button></h2>
+				{(editNotes) ?
+					<section>
+					<MarkdownTextArea maxLength={1000} placeholder={localize("LABEL_EDIT_NOTES_HELPER")} value={workingNotes} onChange={(e) => {setWorkingNotes(e); setChanged(true)}} />
+					<div className="button-container"><SaveButton /></div>
+				</section> :
+				<>{(characterData.notes) &&
+				<section>
+					<CustomMarkdown
+						text={characterData.notes}
+					/>
+				</section>}</>}
 			</> : <></>}
 		</> : <></>}
 	</div>

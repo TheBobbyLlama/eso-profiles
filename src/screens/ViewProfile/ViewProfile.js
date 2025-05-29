@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Profile from "../../components/Profile/Profile";
 
+import { authSelectors } from "../../store/slice/auth";
 import { charActions, charSelectors } from "../../store/slice/characters";
 import dbUtil from "../../db/util";
 import { localize } from "../../localization";
@@ -12,6 +13,7 @@ function ViewProfile() {
 	const { characterName } = useParams();
 	const [ curCharacter, setCurCharacter ] = useState("");
 	const characterData = useSelector(charSelectors.list)[dbUtil.transform(characterName)];
+	const user = useSelector(authSelectors.user);
 	const dispatch = useDispatch();
 
 	// Load character data if needed.  This should always trigger?
@@ -25,6 +27,10 @@ function ViewProfile() {
 	useEffect(() => {
 		if (characterData) {
 			setCurCharacter(characterName);
+
+			if (characterData.character.player === user?.display) {
+				dispatch(charActions.loadCharacterNotes(dbUtil.transform(characterName)));
+			}
 		}
 	}, [ characterData, characterName ]);
 

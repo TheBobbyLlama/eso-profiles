@@ -31,6 +31,7 @@ function Edit() {
 	useEffect(() => {
 		if (characterData) {
 			setFadeClass("fade fade-in");
+			dispatch(charActions.loadCharacterNotes(dbUtil.transform(characterName)));
 		}
 	}, [ characterData, characterName ]);
 

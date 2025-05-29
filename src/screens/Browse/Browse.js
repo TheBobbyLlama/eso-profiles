@@ -101,6 +101,8 @@ function Browse() {
 		} else {
 			setPendingCharacter(key);
 			dispatch(charActions.loadCharacterProfile(key));
+			dispatch(charActions.loadCharacterNotes(key));  // Need to always load notes here, otherwise they will not be available if the user logs in
+
 			startLoadTimer();
 		}
 	}

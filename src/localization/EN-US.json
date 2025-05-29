@@ -76,6 +76,7 @@
 	"LABEL_DELETE_CHARACTER": "Delete Character",
 	"LABEL_DESCRIPTION": "Description",
 	"LABEL_EDIT_CHARACTER": "Edit Character",
+	"LABEL_EDIT_NOTES_HELPER": "Enter any character-specific notes here.  These will only be visible to you.",
 	"LABEL_EMAIL": "Email",
 	"LABEL_ENEMIES": "Enemies",
 	"LABEL_ENEMIES_HELPER": "Any groups or people your character is NOT friendly to",

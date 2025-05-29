@@ -69,7 +69,13 @@
 }
 
 #profile > h2 {
+	align-items: center;
+	display: flex;
 	margin: 10px 0;
+}
+
+#profile > h2 > button {
+	margin-top: 4px;
 }
 
 #profile section {
@@ -81,6 +87,17 @@
 	margin: 10px 0 8px 0;
 	text-align: center;
 	user-select: text;
+}
+
+#profile .button-container {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+#profile .markdown-textarea {
+	height: 20em;
 }
 
 #profile .top-left {

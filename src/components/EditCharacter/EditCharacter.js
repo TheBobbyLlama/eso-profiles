@@ -78,13 +78,7 @@ function EditCharacter({create, character}) {
 	}
 
 	const editCharacter = (e, dataPath) => {
-		const newValue = ((e) => {
-			if (e?.target) {
-				return e.target.value;
-			} else {
-				return e;
-			}
-		})(e);
+		const newValue = e?.target ? e.target.value : e;
 		const newData = { ...workingChar };
 		const path = e.target?.dataset.path.split(".") || dataPath.split(".");
 		
@@ -222,6 +216,11 @@ function EditCharacter({create, character}) {
 			<h2>{localize("LABEL_OOC_INFO")}</h2>
 			<div className="save-container"><SaveButton /></div>
 			<MarkdownTextArea maxLength={1000} placeholder={localize("LABEL_OOC_INFO_HELPER")} value={getCharacteritem("profile.oocInfo")} onChange={editCharacter} dataPath={"profile.oocInfo"} />
+		</section>
+		<section>
+			<h2>{localize("LABEL_NOTES")}</h2>
+			<div className="save-container"><SaveButton /></div>
+			<MarkdownTextArea maxLength={1000} placeholder={localize("LABEL_EDIT_NOTES_HELPER")} value={getCharacteritem("notes")} onChange={editCharacter} dataPath={"notes"} />
 		</section>
 	</main>;
 }

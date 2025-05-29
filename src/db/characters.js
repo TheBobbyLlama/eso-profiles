@@ -56,6 +56,20 @@ function getCharacterProfileData(key) {
 	})
 }
 
+function getCharacterNotesData(key) {
+	return new Promise((res) => {
+		const notesRef = ref(db, `notes/${key}`);
+
+		get(notesRef).then(async (result) => {
+			if (result.exists()) {
+				res({ [key]: result.val() });
+			} else {
+				res({ [key]: ""});
+			}
+		})
+	})
+}
+
 async function canSaveCharacter(key, user, create) {
 	if (!key) throw new Error("canSaveCharacter: No character key!");
 	if (!user) throw new Error("canSaveCharacter: No user!");
@@ -127,6 +141,15 @@ function saveCharacter(characterData) {
 	const updates = {};
 	updates[`characters/${key}`] = characterData.character;
 	updates[`profiles/${key}`] = characterData.profile || null;
+	updates[`notes/${key}`] = characterData.notes || null;
+
+	return update(ref(db), updates);
+}
+
+function saveCharacterNotes(key, notes) {
+	const updates = {};
+
+	updates[`notes/${key}`] = notes || null;
 
 	return update(ref(db), updates);
 }
@@ -143,6 +166,7 @@ function deleteCharacter(characterName, user) {
 	updates[`profiles/${key}`] = null;
 	updates[`stories/${key}`] = null;
 	updates[`storytext/${key}`] = null;
+	updates[`notes/${key}`] = null;
 
 	return update(ref(db), updates);
 }
@@ -154,7 +178,9 @@ const characterFuncs = {
 	getAllCharacterData,
 	getFullCharacterData,
 	getCharacterProfileData,
+	getCharacterNotesData,
 	saveCharacter,
+	saveCharacterNotes,
 };
 
 export default characterFuncs;

@@ -37,6 +37,21 @@ export const charSlice = createSlice({
 				state.list[key].lastUpdate = Date.now();
 			}
 		},
+		loadCharacterNotes(state, action) { },
+		characterNotesLoaded(state, action) {
+			const key = Object.keys(action.payload)[0];
+
+			if (key) {
+				state.list[key].notes = Object.values(action.payload)[0] || "";
+			}
+		},
+		updateCharacterNotes(state, action) {
+			const key = dbUtil.transform(action.payload.character);
+
+			state.list[key].notes = action.payload.notes;
+
+			charFuncs.saveCharacterNotes(key, action.payload.notes);
+		},
 		setListFilter(state, action) {
 			state.filter = action.payload;
 		},
@@ -103,6 +118,15 @@ listener.startListening({
 	effect: async (action, listenerApi) => {
 		charFuncs.getCharacterProfileData(action.payload).then((result) => {
 			listenerApi.dispatch(charActions.characterProfileLoaded(result));
+		})
+	}
+});
+
+listener.startListening({
+	actionCreator: charActions.loadCharacterNotes,
+	effect: async (action, listenerApi) => {
+		charFuncs.getCharacterNotesData(action.payload).then((result) => {
+			listenerApi.dispatch(charActions.characterNotesLoaded(result));
 		})
 	}
 });
