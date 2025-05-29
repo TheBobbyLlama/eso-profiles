@@ -28,7 +28,9 @@ function ViewProfile() {
 		}
 	}, [ characterData, characterName ]);
 
-	document.title = (characterName) ? `${characterName} - ${localize("APP_TITLE")}` : localize("APP_TITLE");
+	useEffect(() => {
+		document.title = (characterName) ? `${characterName} - ${localize("APP_TITLE")}` : localize("APP_TITLE");
+	}, []);
 
 	return <main id="view-profile">
 		<Profile character={curCharacter} />

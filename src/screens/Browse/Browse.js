@@ -58,6 +58,8 @@ function Browse() {
 		}
 
 		window.addEventListener("resize", doResize);
+
+		document.title = localize("APP_TITLE");
 		
 		return () => { window.removeEventListener("resize", doResize) };
 	}, []); // Don't listen to the React linter here
