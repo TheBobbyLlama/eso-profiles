@@ -220,7 +220,7 @@ function EditCharacter({create, character}) {
 		<section>
 			<h2>{localize("LABEL_NOTES")}</h2>
 			<div className="save-container"><SaveButton /></div>
-			<MarkdownTextArea maxLength={1000} placeholder={localize("LABEL_EDIT_NOTES_HELPER")} value={getCharacteritem("notes")} onChange={editCharacter} dataPath={"notes"} />
+			<MarkdownTextArea maxLength={5000} placeholder={localize("LABEL_EDIT_NOTES_HELPER")} value={getCharacteritem("notes")} onChange={editCharacter} dataPath={"notes"} />
 		</section>
 	</main>;
 }

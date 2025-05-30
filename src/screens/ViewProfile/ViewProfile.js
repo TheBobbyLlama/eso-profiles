@@ -27,10 +27,6 @@ function ViewProfile() {
 	useEffect(() => {
 		if (characterData) {
 			setCurCharacter(characterName);
-
-			if (characterData.character.player === user?.display) {
-				dispatch(charActions.loadCharacterNotes(dbUtil.transform(characterName)));
-			}
 		}
 	}, [ characterData, characterName ]);
 

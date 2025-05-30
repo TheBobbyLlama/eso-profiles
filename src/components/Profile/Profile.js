@@ -182,7 +182,7 @@ function Profile({character, inset}) {
 				<h2>{localize("LABEL_NOTES")} <button className="minimal" onClick={toggleEditMode}><FontAwesomeIcon icon={faPen} /></button></h2>
 				{(editNotes) ?
 					<section>
-					<MarkdownTextArea maxLength={1000} placeholder={localize("LABEL_EDIT_NOTES_HELPER")} value={workingNotes} onChange={(e) => {setWorkingNotes(e); setChanged(true)}} />
+					<MarkdownTextArea maxLength={5000} placeholder={localize("LABEL_EDIT_NOTES_HELPER")} value={workingNotes} onChange={(e) => {setWorkingNotes(e); setChanged(true)}} />
 					<div className="button-container"><SaveButton /></div>
 				</section> :
 				<>{(characterData.notes) &&

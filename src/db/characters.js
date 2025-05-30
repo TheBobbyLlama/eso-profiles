@@ -25,16 +25,17 @@ function getFullCharacterData(key) {
 				if (charResult.exists()) {
 					const charData = { character: charResult.val() };
 					const profileRef = ref(db, `profiles/${key}`);
+					const notesRef = ref(db, `notes/${key}`);
 
-					get(profileRef).then(async (profileResult) => {
-						if (profileResult.exists()) {
-							charData.profile = profileResult.val();
-
-							res(charData);
-						} else {
-							res(charData);
+					Promise.all([get(profileRef), get(notesRef)]).then((results) => {
+						if (results[0].exists()) {
+							charData.profile = results[0].val();
 						}
-					})
+
+						charData.notes = results[1].val() || "";
+
+						res(charData);
+					});
 				} else {
 					res({});
 				}
@@ -45,29 +46,20 @@ function getFullCharacterData(key) {
 function getCharacterProfileData(key) {
 	return new Promise((res) => {
 		const profileRef = ref(db, `profiles/${key}`);
-
-		get(profileRef).then(async (result) => {
-			if (result.exists()) {
-				res({ [key]: result.val() });
-			} else {
-				res({ [key]: {}});
-			}
-		})
-	})
-}
-
-function getCharacterNotesData(key) {
-	return new Promise((res) => {
 		const notesRef = ref(db, `notes/${key}`);
 
-		get(notesRef).then(async (result) => {
-			if (result.exists()) {
-				res({ [key]: result.val() });
-			} else {
-				res({ [key]: ""});
+		Promise.all([get(profileRef), get(notesRef)]).then((results) => {
+			const returnData = { [key]: {} };
+
+			if (results[0].exists()) {
+				returnData[key].profile = results[0].val();
 			}
-		})
-	})
+
+			returnData[key].notes = results[1].val() || "";
+
+			res(returnData);
+		});
+	});
 }
 
 async function canSaveCharacter(key, user, create) {
@@ -178,7 +170,6 @@ const characterFuncs = {
 	getAllCharacterData,
 	getFullCharacterData,
 	getCharacterProfileData,
-	getCharacterNotesData,
 	saveCharacter,
 	saveCharacterNotes,
 };
